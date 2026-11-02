@@ -1,63 +1,76 @@
-# FlowFund | The Financial Operating System 🌊
+<div align="center">
 
-> **Deployment status:** Not production-ready until the security and end-to-end checks in [DEPLOYMENT_READINESS.md](DEPLOYMENT_READINESS.md) pass. The current CSV dashboard provides rule-based estimates; it does not move money or provide ARIMA forecasts. Claims below describing those capabilities are aspirational.
+# FlowFund
 
-FlowFund is a production-grade Financial Operating System (OS) designed for the modern freelance economy. It provides automated income stabilization, predictive financial forecasting, and risk-aware buffer management.
+**A personal ledger for freelancers with irregular income.**
 
----
+Import a transaction CSV, review your monthly income and expenses, and explore how long your savings could cover a break.
 
-## 🔄 The Platform Flow: A User Journey
+[Open FlowFund](https://veshwik-flowfund.embarko.app/) · [Run locally](#run-locally) · [Explore the dashboard](frontend/src/pages/Dashboard.jsx) · [Report a bug](../../issues/new?template=bug_report.yml)
 
-The FlowFund experience is a synchronized lifecycle across three specialized engines: **The UI (React)**, **The Orchestrator (Spring Boot)**, and **The Brain (FastAPI AI)**.
+[![Verify FlowFund](https://github.com/VJ-veshwikjain2215/FlowFund/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/VJ-veshwikjain2215/FlowFund/actions/workflows/verify.yml)
+[![Java 21](https://img.shields.io/badge/Java-21-426e45)](backend/pom.xml)
+[![React 19](https://img.shields.io/badge/React-19-149eca)](frontend/package.json)
 
-### 1. 🛫 Genesis: Entry & Identity Establishment
-The journey begins at the **Landing Experience**, where the platform's value propositions are presented through interactive motion-rich designs.
-*   **Onboarding Phase**: New users go through a multi-step "Professional Intelligence" gathering process. Here, they define their freelance category, baseline expenses, and financial goals.
-*   **Identity Sync**: Secure authentication creates a persistent profile that will house all future financial intelligence.
+</div>
 
-### 2. 📥 Ingestion: Establishing the Financial Baseline
-To provide accurate insights, FlowFund needs to understand your financial history.
-*   **Data Pipeline**: Users upload historical transaction records (CSV) or synchronize financial data.
-*   **Normalization**: The system automatically categorizes income streams, separating professional freelance earnings from side-hustles or personal transfers.
+[![FlowFund desktop landing page](.github/assets/desktop.png)](https://veshwik-flowfund.embarko.app/)
 
-### 3. 🧠 Analysis: Deep-Trend Prediction (The AI Engine)
-As soon as data is ingested, the system's AI algorithms (ARIMA and Weighted Moving Averages) take over.
-*   **Volatility Detection**: The AI engine calculates the "Coefficient of Variation" in your income—identifying exactly how unpredictable your earnings are.
-*   **Forecasting**: The system generates a **6-month predictive forecast**, identifying potential "Dry Months" (where income might drop below baseline) and "Surplus Months" (where income is predicted to peak).
+<details>
+<summary>Phone preview</summary>
 
-### 4. 📊 Visualization: Financial Health Mission Control
-The raw intelligence is translated into actionable insights on the **Dashboard**.
-*   **Health Score**: A real-time risk meter that dynamically updates based on your current savings versus your predicted income volatility.
-*   **Future Trends**: High-fidelity line and area charts visualize the predicted 6-month trajectory, allowing for early planning.
+<img src=".github/assets/mobile.png" alt="FlowFund on a 390-pixel phone screen" width="280" />
 
-### 5. 🛡️ Stabilization: Automated Income Buffers
-The final and most critical step is active mitigation.
-*   **Risk-Aware Buffering**: Based on the AI's risk assessment (Low, Medium, or High), the system recommends an "Income Buffer" size.
-*   **Stabilization Logic**: During surplus months, the system "skims" funds into the buffer. During dry months (as predicted by the AI), it automatically releases those funds to ensure the user's personal "monthly salary" remains stable.
+</details>
 
----
+## What FlowFund does
 
-## 🛠️ Operational Execution
+1. **Set a baseline.** Enter your income pattern and regular expenses during onboarding.
+2. **Import transactions.** Upload a CSV with dates and typed amounts or separate credit and debit columns. Each import replaces your account’s previous snapshot. [Example CSV](ai-service/test.csv)
+3. **Review a month.** See income, expenses, and estimated surplus together. The estimates use rules applied to imported records.
+4. **Plan time off.** Compare savings with monthly expenses to explore how long a break could last.
 
-To run the full FlowFund ecosystem, all three specialized engines must be active simultaneously:
+## Built with
 
-### Stage 1: The AI Engine (Python FastAPI)
-Power the predictive modeling backbone.
-```bash
-cd ai-service && python main.py
+| Layer | Technology | Where to look |
+| --- | --- | --- |
+| Interface | React, Vite, Tailwind CSS, Recharts | [Frontend](frontend/) |
+| Accounts and API | Java 21, Spring Boot, Spring Security, Google OAuth | [Backend](backend/) |
+| CSV analysis | Python, FastAPI, pandas | [Analysis service](ai-service/) |
+| Storage | PostgreSQL and Flyway migrations | [Schema](backend/src/main/resources/db/migration/) |
+| Hosting | Embarko | [Live website](https://veshwik-flowfund.embarko.app/) |
+
+The browser calls the Spring API. The backend associates imports with the signed-in account, calls the Python service for analysis, and saves the financial snapshot in PostgreSQL.
+
+## Run locally
+
+Install Docker with Compose. Use a development PostgreSQL database and a Google OAuth web client.
+
+```sh
+git clone https://github.com/VJ-veshwikjain2215/FlowFund.git
+cd FlowFund
+cp .env.example .env
 ```
 
-### Stage 2: The Orchestrator (Java Spring Boot)
-Provide the secure API gateway and data management layer.
-```bash
-cd backend && mvn spring-boot:run
+On PowerShell, use `Copy-Item .env.example .env`. Fill in the database connection, OAuth credentials, and separate JWT and analysis-service secrets. For local Google login, register `http://localhost:8080/login/oauth2/code/google` as an authorized redirect URI.
+
+```sh
+docker compose up --build
 ```
 
-### Stage 3: The Dashboard (React Vite)
-Launch the premium visual interface.
-```bash
-cd frontend && npm run dev
-```
+Open [localhost:3000](http://localhost:3000). See the [deployment readiness notes](DEPLOYMENT_READINESS.md) for credential rotation, staging checks, and estimate assumptions.
 
----
-*FlowFund: Turning financial volatility into predictable stability.*
+## Verification
+
+GitHub Actions runs these checks on pushes and pull requests.
+
+| Directory | Command | Purpose |
+| --- | --- | --- |
+| `frontend/` | `npm ci && npm run build` | Build the production frontend |
+| `backend/` | `mvn test` | Run the Java security regression tests |
+| `ai-service/` | `python -m pip install -r requirements.txt` then `python -m unittest test_analysis` | Check transaction parsing and analysis |
+
+## Project notes
+
+- [Deployment readiness](DEPLOYMENT_READINESS.md) covers account isolation, database configuration, and financial estimates.
+- [Development history](documents/history/COMMIT_PLAN.md) preserves the original implementation plan.

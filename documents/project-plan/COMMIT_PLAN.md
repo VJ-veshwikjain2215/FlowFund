@@ -1,5 +1,7 @@
 # FlowFund - Hackathon Commit Plan
 
+> Historical planning reference, preserved from before the folder reorganization. File paths below are relative to `code/` unless they describe root repository metadata. This is not the current execution or release plan. See [repository structure](../repository-structure.md).
+
 This structured commit guide organizes the FlowFund repository history into logical, progressive, human-readable chunks. Follow this exact sequence to commit your project professionally, demonstrating steady iteration from scaffolding to full-stack integration and final polish.
 
 ## Phase 1: Project Scaffolding & Configuration

@@ -11,7 +11,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 @Component
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -34,13 +33,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             newUser.setEmail(email);
             newUser.setName(name);
             newUser.setProvider("GOOGLE");
-            newUser.setRent(new BigDecimal("1500"));
-            newUser.setGroceries(new BigDecimal("600"));
-            newUser.setUtilities(new BigDecimal("200"));
             return userRepository.save(newUser);
         });
 
         String token = jwtUtil.generateToken(user.getEmail());
-        getRedirectStrategy().sendRedirect(request, response, frontendUrl + "/auth?token=" + token);
+        getRedirectStrategy().sendRedirect(request, response, frontendUrl.replaceAll("/+$", "") + "/auth#token=" + token);
     }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
+import { apiBaseUrl } from '../config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Lock, Mail, User, Loader2, Globe, Cpu, ShieldCheck } from 'lucide-react';
 
@@ -34,12 +35,12 @@ const Auth = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const token = searchParams.get('token');
+    const token = new URLSearchParams(window.location.hash.slice(1)).get('token');
     const mode = searchParams.get('mode');
     
     if (token) {
       setToken(token);
-      navigate('/onboarding');
+      navigate('/onboarding', { replace: true });
     }
     
     if (mode === 'signup') {
@@ -70,7 +71,7 @@ const Auth = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8085/oauth2/authorization/google';
+    window.location.href = `${apiBaseUrl.replace(/\/api\/?$/, '')}/oauth2/authorization/google`;
   };
 
   return (

@@ -2,6 +2,7 @@ package com.flowfund.engine.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "users")
@@ -12,6 +13,7 @@ public class User {
     private String name;
     @Column(unique = true)
     private String email;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String provider;
 
@@ -21,6 +23,7 @@ public class User {
     private BigDecimal utilities = BigDecimal.ZERO;
     private BigDecimal internet = BigDecimal.ZERO;
     private BigDecimal transport = BigDecimal.ZERO;
+    private BigDecimal otherExpenses = BigDecimal.ZERO;
 
     private BigDecimal monthlyDebt = BigDecimal.ZERO; // EMI / Loan Repayments
     private BigDecimal inflationRate = new BigDecimal("0.06"); // 6% Default
@@ -88,6 +91,8 @@ public class User {
     public void setInternet(BigDecimal internet) { this.internet = internet; }
     public BigDecimal getTransport() { return transport != null ? transport : BigDecimal.ZERO; }
     public void setTransport(BigDecimal transport) { this.transport = transport; }
+    public BigDecimal getOtherExpenses() { return otherExpenses != null ? otherExpenses : BigDecimal.ZERO; }
+    public void setOtherExpenses(BigDecimal otherExpenses) { this.otherExpenses = otherExpenses; }
     public BigDecimal getMonthlyDebt() { return monthlyDebt != null ? monthlyDebt : BigDecimal.ZERO; }
     public void setMonthlyDebt(BigDecimal monthlyDebt) { this.monthlyDebt = monthlyDebt; }
     public BigDecimal getInflationRate() { return inflationRate != null ? inflationRate : new BigDecimal("0.06"); }

@@ -10,6 +10,8 @@ services:
     envVars:
       - key: PORT
         value: 8000
+      - key: AI_SERVICE_SECRET
+        sync: false
 
   # 2. Backend Service (Spring Boot)
   - type: web
@@ -28,6 +30,12 @@ services:
         sync: false
       - key: SUPABASE_DB_PASSWORD
         sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: AI_SERVICE_SECRET
+        sync: false
+      - key: AI_SERVICE_URL
+        value: http://flowfund-ai-service:8000
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET
@@ -35,4 +43,4 @@ services:
       - key: ARIMA_API_URL
         value: http://flowfund-ai-service:8000/forecast
       - key: FRONTEND_URL
-        value: https://rupeerakshak.vercel.app/
+        sync: false

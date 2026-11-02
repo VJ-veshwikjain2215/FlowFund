@@ -31,6 +31,7 @@ public class UserController {
         if (data.containsKey("utilities")) user.setUtilities(new java.math.BigDecimal(data.get("utilities").toString()));
         if (data.containsKey("internet")) user.setInternet(new java.math.BigDecimal(data.get("internet").toString()));
         if (data.containsKey("transport")) user.setTransport(new java.math.BigDecimal(data.get("transport").toString()));
+        if (data.containsKey("otherExpenses")) user.setOtherExpenses(new java.math.BigDecimal(data.get("otherExpenses").toString()));
         if (data.containsKey("age")) user.setAge(Integer.parseInt(data.get("age").toString()));
         if (data.containsKey("dependents")) user.setDependents(Integer.parseInt(data.get("dependents").toString()));
         

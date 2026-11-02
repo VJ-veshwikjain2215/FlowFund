@@ -13,7 +13,7 @@ const Navbar = () => {
         {/* Quick Metrics */}
         <div className="flex items-center text-[10px] uppercase font-bold tracking-[0.2em] text-white/30 mr-8">
           <div className="flex flex-col items-end">
-            <span className="text-[11px] text-[#A78BFA] opacity-80 mb-0.5 tracking-widest font-black uppercase">SAFE SPEND</span>
+            <span className="text-[11px] text-[#8fb697] opacity-80 mb-0.5 tracking-widest font-black uppercase">SAFE SPEND</span>
             <span className="text-white monos-num font-black text-[24px] leading-none drop-shadow-[0_0_12px_rgba(167,139,250,0.8)]">
             {formatCurrency(dashboard?.safe_spend)}
             </span>

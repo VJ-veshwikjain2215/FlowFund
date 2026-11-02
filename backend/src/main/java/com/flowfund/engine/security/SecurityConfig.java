@@ -46,6 +46,8 @@ public class SecurityConfig {
             )
             .oauth2Login(oauth2 -> oauth2
                 .successHandler(successHandler)
+                .failureHandler((request, response, error) -> response.sendRedirect(
+                    frontendUrl.replaceAll("/+$", "") + "/auth?error=google"))
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -63,3 +65,4 @@ public class SecurityConfig {
         return source;
     }
 }
+

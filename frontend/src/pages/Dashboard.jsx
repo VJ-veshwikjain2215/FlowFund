@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 import { Loader2, UploadCloud, Bell, ShieldCheck, AlertCircle, TrendingDown, Wallet, Target, ChevronRight } from 'lucide-react';
 
-const pieColors = ['#A78BFA', '#F472B6', '#FDBA74'];
+const pieColors = ['#8fb697', '#d5ae73', '#FDBA74'];
 
 const CircularProgress = ({ percentage }) => {
   const radius = 36;
@@ -25,7 +25,7 @@ const CircularProgress = ({ percentage }) => {
         <circle
           cx="48" cy="48" r={radius} stroke="currentColor" strokeWidth="8" fill="transparent"
           strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
-          className="text-[#A78BFA] transition-all duration-1000 ease-out drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]"
+          className="text-[#8fb697] transition-all duration-1000 ease-out drop-shadow-[0_0_8px_rgba(167,139,250,0.5)]"
           strokeLinecap="round"
         />
       </svg>
@@ -117,11 +117,11 @@ const Dashboard = () => {
 
   // Background style
   const pageBgStyle = {
-    background: 'radial-gradient(circle at 20% 30%, rgba(236,72,153,0.12), transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.12), transparent 40%), #0b0b12'
+    background: 'var(--bg-main)'
   };
 
-  const glassCardClass = "bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[20px] p-8 border border-purple-500/20";
-  const glassHoverClass = "hover:scale-[1.02] hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)] hover:bg-[#1A1625]/80 hover:border-purple-500/40 transition-all duration-300";
+  const glassCardClass = "bg-[#25332c]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[20px] p-8 border border-purple-500/20";
+  const glassHoverClass = "hover:scale-[1.02] hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)] hover:bg-[#25332c]/80 hover:border-purple-500/40 transition-all duration-300";
 
   // 1. Entry State (Loading)
   if (isLoading && !hasRealData) {
@@ -146,53 +146,21 @@ const Dashboard = () => {
   // 2. Entry State (Empty - First Time)
   if (isNewUser) {
     return (
-      <div className="min-h-screen flex flex-col font-body p-8 lg:p-12 relative" style={pageBgStyle}>
-        <header className="flex justify-between items-center mb-auto max-w-7xl mx-auto w-full">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-[#A78BFA] to-[#F472B6]">
-              <div className="w-3.5 h-3.5 bg-white rounded-sm rotate-45" />
-            </div>
-            <div className="font-black display-font tracking-tighter text-white text-2xl scale-y-110">RupeeRakshak</div>
-          </div>
-        </header>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="m-auto flex flex-col items-center bg-[#1A1625]/60 backdrop-blur-xl p-12 lg:p-20 rounded-[32px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] text-center max-w-xl w-full border border-purple-500/20 relative"
-        >
-          {error && (
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-full max-w-md bg-red-500/10 text-red-400 border border-red-500/20 px-4 py-3 rounded-xl flex items-center gap-2 text-sm font-semibold shadow-sm backdrop-blur-md">
-              <AlertCircle size={16} />
-              {error}
-            </div>
-          )}
-          {successMsg && !isLoading && (
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-full max-w-md bg-green-500/10 text-green-400 border border-green-500/20 px-4 py-3 rounded-xl flex items-center gap-2 text-sm font-semibold shadow-sm backdrop-blur-md">
-              <ShieldCheck size={16} />
-              {successMsg}
-            </div>
-          )}
-          <div className="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mb-8 border border-white/10">
-            <UploadCloud size={40} className="text-[#A78BFA]" />
-          </div>
-          <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Upload your income file to begin</h2>
-          <p className="text-white/60 mb-10 leading-relaxed font-medium">
-            Upload a CSV to view estimates based on your transaction history.
-          </p>
-          <label className="bg-gradient-to-r from-[#A78BFA] to-[#F472B6] hover:shadow-[0_0_20px_rgba(167,139,250,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer text-white font-bold py-4 px-10 rounded-2xl flex items-center gap-2">
-            {isLoading ? <Loader2 className="animate-spin" size={18} /> : <span>Choose CSV File</span>}
-            <input type="file" className="hidden" onChange={handleUpload} accept=".csv" disabled={isLoading} />
-          </label>
-        </motion.div>
-      </div>
+      <section className="first-statement">
+        <small>YOUR LEDGER / FIRST IMPORT</small>
+        <h1>Open the books.</h1>
+        <p>Upload a transaction CSV to see your income, spending and monthly estimates.</p>
+        <label className="import-file">Transaction file
+          <input type="file" accept=".csv" onChange={handleUpload} disabled={isLoading} />
+        </label>
+        {error && <p role="alert">{error}</p>}
+        {successMsg && <p role="status">{successMsg}</p>}
+      </section>
     );
   }
-
   // 3. Active Dashboard
   return (
-    <div className="min-h-screen font-body p-6 lg:p-10 pb-24 text-white selection:bg-[#F472B6] selection:text-white" style={pageBgStyle}>
+    <div className="min-h-screen font-body p-6 lg:p-10 pb-24 text-white selection:bg-[#d5ae73] selection:text-white" style={pageBgStyle}>
       <div className="max-w-[1400px] mx-auto space-y-8">
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
@@ -208,7 +176,7 @@ const Dashboard = () => {
           )}
 
           {/* SEC 1: HERO INSIGHT */}
-          <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-[#A78BFA] to-[#F472B6] rounded-[32px] p-8 lg:p-10 shadow-[0_15px_40px_rgba(167,139,250,0.2)] flex flex-col justify-center hover:shadow-[0_20px_50px_rgba(167,139,250,0.35)] transition-all duration-500 border border-white/10 h-full min-h-[220px]">
+          <div className="lg:col-span-2 relative overflow-hidden bg-gradient-to-r from-[#8fb697] to-[#d5ae73] rounded-[32px] p-8 lg:p-10 shadow-[0_15px_40px_rgba(167,139,250,0.2)] flex flex-col justify-center hover:shadow-[0_20px_50px_rgba(167,139,250,0.35)] transition-all duration-500 border border-white/10 h-full min-h-[220px]">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/10 blur-[60px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
             <div className="relative z-10 space-y-4">
@@ -226,15 +194,15 @@ const Dashboard = () => {
           </div>
 
           {/* SEC 1b: QUICK ACTION */}
-          <div className={`lg:col-span-1 bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[32px] p-8 border border-purple-500/20 hover:border-purple-500/40 hover:bg-[#1A1625]/80 transition-all duration-300 flex flex-col items-center justify-center text-center h-full min-h-[220px]`}>
+          <div className={`lg:col-span-1 bg-[#25332c]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[32px] p-8 border border-purple-500/20 hover:border-purple-500/40 hover:bg-[#25332c]/80 transition-all duration-300 flex flex-col items-center justify-center text-center h-full min-h-[220px]`}>
             <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center mb-4 border border-white/10">
-              <UploadCloud size={24} className="text-[#A78BFA]" />
+              <UploadCloud size={24} className="text-[#8fb697]" />
             </div>
             <h3 className="text-white font-bold text-lg mb-2">Sync Financial Data</h3>
             <p className="text-white/50 text-xs font-medium mb-6 px-4">
               Upload your latest income data to refresh insights
             </p>
-            <label className="w-full max-w-[200px] bg-gradient-to-r from-[#A78BFA] to-[#F472B6] hover:shadow-[0_0_20px_rgba(167,139,250,0.4)] hover:-translate-y-0.5 text-white transition-all cursor-pointer font-bold py-3 px-6 rounded-2xl flex justify-center items-center gap-2 text-sm">
+            <label className="w-full max-w-[200px] bg-gradient-to-r from-[#8fb697] to-[#d5ae73] hover:shadow-[0_0_20px_rgba(167,139,250,0.4)] hover:-translate-y-0.5 text-white transition-all cursor-pointer font-bold py-3 px-6 rounded-2xl flex justify-center items-center gap-2 text-sm">
               {isLoading ? <Loader2 className="animate-spin" size={16} /> : "Upload CSV"}
               <input type="file" className="hidden" onChange={handleUpload} accept=".csv" disabled={isLoading} />
             </label>
@@ -299,7 +267,7 @@ const Dashboard = () => {
           {/* Prediction */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
             className={`${glassCardClass} ${glassHoverClass} relative overflow-hidden group ${!hasRealData ? 'opacity-50 grayscale pointer-events-none' : ''}`}>
-            <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-[#F472B6]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#F472B6]/20 transition-colors" />
+            <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-[#d5ae73]/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-[#d5ae73]/20 transition-colors" />
             <p className="text-white/40 text-sm font-bold uppercase tracking-wider mb-2">Next Month Prediction</p>
             
             <div className="flex flex-col gap-0.5 mb-3">
@@ -308,13 +276,13 @@ const Dashboard = () => {
                   {hasRealData ? <>₹<CountUp end={predictionMin} duration={2} separator="," /></> : "₹--"}
                 </span>
                 <span className="mx-2 text-white/20 text-xl font-medium">–</span>
-                <span className="bg-gradient-to-r from-[#F472B6] to-[#F472B6]/70 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#d5ae73] to-[#d5ae73]/70 bg-clip-text text-transparent">
                   {hasRealData ? <>₹<CountUp end={predictionMax} duration={2} separator="," /></> : "₹--"}
                 </span>
               </h3>
             </div>
 
-            <div className="inline-flex flex-col gap-1 px-3 py-2 bg-[#F472B6]/10 text-[#F472B6] border border-[#F472B6]/20 rounded-lg text-xs font-bold drop-shadow-sm">
+            <div className="inline-flex flex-col gap-1 px-3 py-2 bg-[#d5ae73]/10 text-[#d5ae73] border border-[#d5ae73]/20 rounded-lg text-xs font-bold drop-shadow-sm">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-1.5"><Target size={12} /> {hasRealData ? (dashboard?.model_used || "Rule-Based Estimate") : "No AI data"}</div>
               </div>
@@ -322,7 +290,7 @@ const Dashboard = () => {
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${reliability}%` }}
-                  className="h-full bg-gradient-to-r from-[#A78BFA] to-[#F472B6]"
+                  className="h-full bg-gradient-to-r from-[#8fb697] to-[#d5ae73]"
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] mt-0.5">
@@ -351,8 +319,8 @@ const Dashboard = () => {
                     <AreaChart data={chartData} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                       <defs>
                         <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#A78BFA" stopOpacity={0.5} />
-                          <stop offset="95%" stopColor="#A78BFA" stopOpacity={0} />
+                          <stop offset="5%" stopColor="#8fb697" stopOpacity={0.5} />
+                          <stop offset="95%" stopColor="#8fb697" stopOpacity={0} />
                         </linearGradient>
                         <filter id="glow">
                           <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
@@ -371,7 +339,7 @@ const Dashboard = () => {
                         formatter={(value) => [`₹${value}`, "Income"]}
                         cursor={{ stroke: 'rgba(167,139,250,0.5)', strokeWidth: 1, strokeDasharray: '5 5' }}
                       />
-                      <Area type="monotone" dataKey="income" stroke="#A78BFA" strokeWidth={4} fillOpacity={1} fill="url(#colorIncome)" animationDuration={2000} filter="url(#glow)" />
+                      <Area type="monotone" dataKey="income" stroke="#8fb697" strokeWidth={4} fillOpacity={1} fill="url(#colorIncome)" animationDuration={2000} filter="url(#glow)" />
                     </AreaChart>
                   </ResponsiveContainer>
                 ) : (
@@ -398,8 +366,8 @@ const Dashboard = () => {
                       <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} dy={5} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }} tickFormatter={(val) => `${val / 1000}k`} />
                       <RechartsTooltip cursor={{ fill: 'rgba(255,255,255,0.02)' }} contentStyle={{ backgroundColor: 'rgba(26,22,37,0.8)', backdropFilter: 'blur(10px)', borderRadius: '12px', border: '1px solid rgba(167,139,250,0.2)' }} itemStyle={{ color: '#fff' }} />
-                      <Bar dataKey="income" fill="#A78BFA" radius={[10, 10, 0, 0]} animationDuration={1500} filter="url(#glowPurple)" />
-                      <Bar dataKey="expense" fill="#F472B6" radius={[10, 10, 0, 0]} animationDuration={1500} filter="url(#glowPink)" />
+                      <Bar dataKey="income" fill="#8fb697" radius={[10, 10, 0, 0]} animationDuration={1500} filter="url(#glowPurple)" />
+                      <Bar dataKey="expense" fill="#d5ae73" radius={[10, 10, 0, 0]} animationDuration={1500} filter="url(#glowPink)" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -419,8 +387,8 @@ const Dashboard = () => {
                   </ResponsiveContainer>
                 </div>
                 <div className="w-full pt-4 flex justify-between gap-2 border-t border-white/5 text-[11px] font-bold text-white/50">
-                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#A78BFA] shadow-[0_0_8px_rgba(167,139,250,0.5)]" /> Usable</div>
-                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#F472B6] shadow-[0_0_8px_rgba(244,114,182,0.5)]" /> Illustrative tax</div>
+                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#8fb697] shadow-[0_0_8px_rgba(167,139,250,0.5)]" /> Usable</div>
+                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#d5ae73] shadow-[0_0_8px_rgba(244,114,182,0.5)]" /> Illustrative tax</div>
                   <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#FDBA74] shadow-[0_0_8px_rgba(253,186,116,0.5)]" /> Expenses</div>
                 </div>
               </motion.div>
@@ -437,8 +405,8 @@ const Dashboard = () => {
               <div className="space-y-4 flex-1">
                 {(hasRealData ? dynamicInsights : ["No insights available", "Awaiting financial patterns"]).map((insightText, idx) => {
                   let Icon = hasRealData ? Bell : Loader2;
-                  let colorClass = hasRealData ? "text-[#A78BFA]" : "text-white/20";
-                  let bgClass = hasRealData ? "bg-[#A78BFA]/10 border-[#A78BFA]/20" : "bg-white/5 border-white/10";
+                  let colorClass = hasRealData ? "text-[#8fb697]" : "text-white/20";
+                  let bgClass = hasRealData ? "bg-[#8fb697]/10 border-[#8fb697]/20" : "bg-white/5 border-white/10";
 
                   if (hasRealData) {
                     if (insightText.toLowerCase().includes('warning') || insightText.toLowerCase().includes('add more data') || insightText.toLowerCase().includes('alert')) {
@@ -447,8 +415,8 @@ const Dashboard = () => {
                       bgClass = "bg-[#FDBA74]/10 border-[#FDBA74]/20";
                     } else if (insightText.toLowerCase().includes('stability')) {
                       Icon = ShieldCheck;
-                      colorClass = "text-[#F472B6]";
-                      bgClass = "bg-[#F472B6]/10 border-[#F472B6]/20";
+                      colorClass = "text-[#d5ae73]";
+                      bgClass = "bg-[#d5ae73]/10 border-[#d5ae73]/20";
                     }
                   }
 

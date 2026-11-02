@@ -21,3 +21,5 @@ FlowFund is not yet approved for production use. Run the tests and verify a stag
 5. Review calculation assumptions and product copy with a qualified financial reviewer. The model uses a simple rule-based estimate; it does not move funds or perform ARIMA forecasting. The 15% tax amount is illustrative, and the available transaction history does not establish an actual cash balance or emergency fund.
 
 Manual transaction entry is currently disabled. The older Spring forecasting pipeline is separate from the CSV dashboard and its ARIMA endpoint is not implemented; do not present it as an active capability.
+
+For a backend behind an HTTPS proxy, set GOOGLE_REDIRECT_URI on the backend to its public HTTPS URL ending in /login/oauth2/code/google. Register that exact URI on the same Google web client as GOOGLE_CLIENT_ID. Local development uses the request origin by default.

@@ -118,15 +118,15 @@ const Onboarding = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden font-body"
-         style={{ background: 'radial-gradient(circle at 20% 30%, rgba(236,72,153,0.12), transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.12), transparent 40%), #0b0b12' }}>
+         style={{ background: 'radial-gradient(circle at 20% 30%, rgba(236,72,153,0.12), transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.12), transparent 40%), #19251f' }}>
       
       <div className="absolute top-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
         {[1, 2].map(i => (
           <div key={i} className="flex items-center gap-4">
-             <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 shadow-lg ${step >= i ? 'border-[#A78BFA] bg-[#A78BFA]/20 text-[#A78BFA]' : 'border-white/10 bg-white/5 text-white/30'}`}>
+             <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-500 shadow-lg ${step >= i ? 'border-[#8fb697] bg-[#8fb697]/20 text-[#8fb697]' : 'border-white/10 bg-white/5 text-white/30'}`}>
                 <span className="text-xs font-black">{i}</span>
              </div>
-             {i === 1 && <div className={`w-16 h-[2px] rounded-full transition-colors duration-500 ${step > i ? 'bg-[#A78BFA]' : 'bg-white/10'}`} />}
+             {i === 1 && <div className={`w-16 h-[2px] rounded-full transition-colors duration-500 ${step > i ? 'bg-[#8fb697]' : 'bg-white/10'}`} />}
           </div>
         ))}
       </div>
@@ -138,9 +138,9 @@ const Onboarding = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="w-full max-w-2xl bg-[#1A1625]/60 backdrop-blur-xl border border-white/5 rounded-[40px] p-10 md:p-14 relative z-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden"
+          className="w-full max-w-2xl bg-[#25332c]/60 backdrop-blur-xl border border-white/5 rounded-[40px] p-10 md:p-14 relative z-20 shadow-[0_20px_60px_rgba(0,0,0,0.5)] overflow-hidden"
         >
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#A78BFA]/80 to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#8fb697]/80 to-transparent" />
           
           {error && (
             <motion.div 
@@ -158,8 +158,8 @@ const Onboarding = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between mb-4">
                    <div className="flex items-center gap-3">
-                      <div className="h-[2px] w-8 bg-[#A78BFA]/60" />
-                      <span className="text-xs font-black uppercase tracking-[0.4em] text-[#A78BFA]">Step 1 of 2</span>
+                      <div className="h-[2px] w-8 bg-[#8fb697]/60" />
+                      <span className="text-xs font-black uppercase tracking-[0.4em] text-[#8fb697]">Step 1 of 2</span>
                    </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white">TELL US ABOUT <br /> HOW YOU EARN.</h1>
@@ -172,13 +172,13 @@ const Onboarding = () => {
                 <div className="space-y-3 group">
                   <label className="block text-sm font-bold uppercase tracking-wider text-white/60 ml-2">Job Designation / Role</label>
                   <div className="relative">
-                    <Briefcase className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-[#A78BFA] transition-colors" />
+                    <Briefcase className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-[#8fb697] transition-colors" />
                     <input 
                       type="text"
                       placeholder="e.g. Graphic Designer, Freelance Writer"
                       value={profession}
                       onChange={handleProfessionChange}
-                      className="w-full h-16 bg-white/[0.02] border border-white/10 rounded-2xl pl-16 pr-6 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/30 transition-all font-medium placeholder:text-white/20"
+                      className="w-full h-16 bg-white/[0.02] border border-white/10 rounded-2xl pl-16 pr-6 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/30 transition-all font-medium placeholder:text-white/20"
                     />
                   </div>
                 </div>
@@ -194,7 +194,7 @@ const Onboarding = () => {
                       value={age}
                       onChange={e => setAge(e.target.value)}
                       onWheel={(e) => e.target.blur()} 
-                      className="w-full h-16 bg-white/[0.02] border border-white/10 rounded-2xl px-6 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/30 transition-all font-medium placeholder:text-white/20"
+                      className="w-full h-16 bg-white/[0.02] border border-white/10 rounded-2xl px-6 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/30 transition-all font-medium placeholder:text-white/20"
                     />
                   </div>
                   <p className="text-xs text-white/40 ml-2 mt-2 font-medium">You must be at least 18 years old to continue.</p>
@@ -206,7 +206,7 @@ const Onboarding = () => {
                   whileHover={{ scale: 1.01, boxShadow: '0 0 30px rgba(167, 139, 250, 0.3)' }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleNext}
-                  className="w-full h-16 bg-gradient-to-r from-purple-500 to-[#A78BFA] text-white rounded-2xl font-black uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 transition-all relative overflow-hidden group shadow-lg"
+                  className="w-full h-16 bg-gradient-to-r from-purple-500 to-[#8fb697] text-white rounded-2xl font-black uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 transition-all relative overflow-hidden group shadow-lg"
                 >
                   <span className="relative z-10">Build My Plan</span>
                   <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1.5 transition-transform" />
@@ -219,8 +219,8 @@ const Onboarding = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between mb-4">
                    <div className="flex items-center gap-3">
-                      <div className="h-[2px] w-8 bg-[#A78BFA]/60" />
-                      <span className="text-xs font-black uppercase tracking-[0.4em] text-[#A78BFA]">Step 2 of 2</span>
+                      <div className="h-[2px] w-8 bg-[#8fb697]/60" />
+                      <span className="text-xs font-black uppercase tracking-[0.4em] text-[#8fb697]">Step 2 of 2</span>
                    </div>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-black italic tracking-tighter text-white uppercase">ESSENTIAL <br /> MONTHLY EXPENSES.</h1>
@@ -239,7 +239,7 @@ const Onboarding = () => {
                     </button>
                     <button 
                       onClick={() => setIsEstimate(true)}
-                      className={`text-xs font-bold px-4 py-2 rounded-lg transition-all ${isEstimate ? 'bg-[#A78BFA] text-black' : 'text-white/40 hover:text-white/70'}`}
+                      className={`text-xs font-bold px-4 py-2 rounded-lg transition-all ${isEstimate ? 'bg-[#8fb697] text-black' : 'text-white/40 hover:text-white/70'}`}
                     >
                       Estimate
                     </button>
@@ -260,7 +260,7 @@ const Onboarding = () => {
                        <label className="text-sm font-bold text-white/80 tracking-wide flex items-center gap-2">
                           <span>{item.icon}</span> {item.label}
                        </label>
-                       <span className="text-lg font-black text-[#A78BFA]">₹{item.value ? Number(item.value).toLocaleString('en-IN') : '0'}</span>
+                       <span className="text-lg font-black text-[#8fb697]">₹{item.value ? Number(item.value).toLocaleString('en-IN') : '0'}</span>
                     </div>
 
                     <div className="relative">
@@ -273,7 +273,7 @@ const Onboarding = () => {
                             step="500"
                             value={item.value || 0}
                             onChange={e => item.setter(e.target.value)}
-                            className="w-full h-2.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#A78BFA] hover:accent-purple-300 transition-all"
+                            className="w-full h-2.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#8fb697] hover:accent-purple-300 transition-all"
                           />
                           <div className="flex justify-between mt-3 text-xs font-bold text-white/30">
                              <span>₹0</span>
@@ -282,13 +282,13 @@ const Onboarding = () => {
                         </div>
                       ) : (
                         <>
-                          <div className="absolute left-5 top-1/2 -translate-y-1/2 text-lg font-black text-white/30 group-focus-within:text-[#A78BFA]">₹</div>
+                          <div className="absolute left-5 top-1/2 -translate-y-1/2 text-lg font-black text-white/30 group-focus-within:text-[#8fb697]">₹</div>
                           <input 
                             type="number"
                             placeholder="0"
                             value={item.value}
                             onChange={e => item.setter(e.target.value)}
-                            className="w-full h-14 bg-white/[0.02] border border-white/10 rounded-2xl pl-12 pr-4 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/30 transition-all font-medium"
+                            className="w-full h-14 bg-white/[0.02] border border-white/10 rounded-2xl pl-12 pr-4 text-white text-base outline-none focus:bg-white/[0.04] focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/30 transition-all font-medium"
                           />
                         </>
                       )}
@@ -311,7 +311,7 @@ const Onboarding = () => {
                         initial={{ opacity: 0, height: 0, overflow: 'hidden' }}
                         animate={{ opacity: 1, height: 'auto', overflow: 'visible' }}
                         exit={{ opacity: 0, height: 0, overflow: 'hidden' }}
-                        className="group flex flex-col md:flex-row gap-4 items-start md:items-center bg-[#1A1625]/40 border border-white/5 p-4 rounded-2xl relative"
+                        className="group flex flex-col md:flex-row gap-4 items-start md:items-center bg-[#25332c]/40 border border-white/5 p-4 rounded-2xl relative"
                       >
                         <button 
                            onClick={() => setOthers(others.filter(o => o.id !== item.id))}
@@ -331,7 +331,7 @@ const Onboarding = () => {
                                newOthers[index].label = e.target.value;
                                setOthers(newOthers);
                             }}
-                            className="w-full bg-transparent border-b border-white/10 px-2 py-1 text-white text-base outline-none focus:border-[#A78BFA]/50 transition-colors placeholder:text-white/20 font-medium"
+                            className="w-full bg-transparent border-b border-white/10 px-2 py-1 text-white text-base outline-none focus:border-[#8fb697]/50 transition-colors placeholder:text-white/20 font-medium"
                           />
                         </div>
 
@@ -349,7 +349,7 @@ const Onboarding = () => {
                                    newOthers[index].value = e.target.value;
                                    setOthers(newOthers);
                                 }}
-                                className="w-full h-2.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#A78BFA] hover:accent-purple-300 transition-all"
+                                className="w-full h-2.5 bg-white/10 rounded-full appearance-none cursor-pointer accent-[#8fb697] hover:accent-purple-300 transition-all"
                               />
                             </div>
                           ) : (
@@ -364,14 +364,14 @@ const Onboarding = () => {
                                    newOthers[index].value = e.target.value;
                                    setOthers(newOthers);
                                 }}
-                                className="w-full h-10 bg-white/[0.02] border border-white/10 rounded-xl pl-8 pr-4 text-white text-sm font-medium outline-none focus:border-[#A78BFA]/50"
+                                className="w-full h-10 bg-white/[0.02] border border-white/10 rounded-xl pl-8 pr-4 text-white text-sm font-medium outline-none focus:border-[#8fb697]/50"
                               />
                             </div>
                           )}
                         </div>
 
                         <div className="w-full md:w-24 text-right">
-                           <span className="text-lg font-black text-[#A78BFA]">₹{item.value ? Number(item.value).toLocaleString('en-IN') : '0'}</span>
+                           <span className="text-lg font-black text-[#8fb697]">₹{item.value ? Number(item.value).toLocaleString('en-IN') : '0'}</span>
                         </div>
                       </motion.div>
                     ))}
@@ -380,7 +380,7 @@ const Onboarding = () => {
 
                 <button 
                   onClick={() => setOthers([...others, { id: Date.now(), label: '', value: '' }])}
-                  className="flex items-center gap-2 text-sm font-bold text-[#A78BFA] hover:text-white transition-colors"
+                  className="flex items-center gap-2 text-sm font-bold text-[#8fb697] hover:text-white transition-colors"
                 >
                   <Plus className="w-4 h-4" /> Add Expense
                 </button>
@@ -398,7 +398,7 @@ const Onboarding = () => {
                     whileHover={{ scale: 1.01, boxShadow: '0 0 30px rgba(167, 139, 250, 0.3)' }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleSubmit}
-                    className="flex-1 h-16 bg-gradient-to-r from-purple-500 to-[#A78BFA] text-white rounded-2xl font-black uppercase tracking-[0.1em] text-xs md:text-sm flex items-center justify-center gap-3 transition-all relative overflow-hidden group shadow-2xl"
+                    className="flex-1 h-16 bg-gradient-to-r from-purple-500 to-[#8fb697] text-white rounded-2xl font-black uppercase tracking-[0.1em] text-xs md:text-sm flex items-center justify-center gap-3 transition-all relative overflow-hidden group shadow-2xl"
                   >
                     <span className="relative z-10">Deploy My Safety Buffer</span>
                     <CheckCircle2 size={18} className="relative z-10 group-hover:scale-125 transition-transform duration-500" />

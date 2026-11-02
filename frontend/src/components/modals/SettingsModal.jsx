@@ -75,7 +75,7 @@ const SettingsModal = ({ isOpen, onClose, type }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="relative w-full max-w-md bg-[#1A1625] border border-white/10 rounded-[32px] p-8 shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-[#25332c] border border-white/10 rounded-[32px] p-8 shadow-2xl overflow-hidden"
           >
             {/* Background Glow */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/10 rounded-full blur-[60px]" />

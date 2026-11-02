@@ -48,7 +48,7 @@ const Transactions = () => {
         </SlideUp>
         
         <div className="flex items-center gap-4">
-           {isLoading && <div className="text-xs font-bold text-[#A78BFA] animate-pulse">Syncing...</div>}
+           {isLoading && <div className="text-xs font-bold text-[#8fb697] animate-pulse">Syncing...</div>}
            <input 
               type="file" 
               accept=".csv" 
@@ -56,7 +56,7 @@ const Transactions = () => {
               className="hidden" 
               onChange={handleFileChange} 
            />
-           <label htmlFor="csv-upload" className="bg-[#A78BFA]/10 text-[#A78BFA] border border-[#A78BFA]/30 px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-[11px] hover:bg-[#A78BFA]/20 cursor-pointer flex items-center gap-2 transition-all">
+           <label htmlFor="csv-upload" className="bg-[#8fb697]/10 text-[#8fb697] border border-[#8fb697]/30 px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-[11px] hover:bg-[#8fb697]/20 cursor-pointer flex items-center gap-2 transition-all">
               <UploadCloud size={16} /> Data Sync (CSV)
            </label>
         </div>
@@ -103,7 +103,7 @@ const Transactions = () => {
       )}
 
       {showAddForm && (
-        <SlideUp className="bg-[#1A1625]/80 backdrop-blur-2xl border border-purple-500/30 p-10 rounded-[40px] shadow-2xl relative overflow-hidden">
+        <SlideUp className="bg-[#25332c]/80 backdrop-blur-2xl border border-purple-500/30 p-10 rounded-[40px] shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
           <button onClick={() => setShowAddForm(false)} className="absolute top-6 right-6 text-white/20 hover:text-white transition-colors">
             <X size={20} />
@@ -111,8 +111,8 @@ const Transactions = () => {
 
           <form onSubmit={handleManualAdd} className="space-y-8">
             <div className="flex items-center gap-4 mb-4">
-                <div className="h-[2px] w-8 bg-[#A78BFA]/40" />
-                <h3 className="text-[12px] font-black uppercase tracking-[0.4em] text-[#A78BFA]">Manual Protocol Entry</h3>
+                <div className="h-[2px] w-8 bg-[#8fb697]/40" />
+                <h3 className="text-[12px] font-black uppercase tracking-[0.4em] text-[#8fb697]">Manual Protocol Entry</h3>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -123,7 +123,7 @@ const Transactions = () => {
                   required
                   value={newTx.date}
                   onChange={e => setNewTx({...newTx, date: e.target.value})}
-                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/20 outline-none transition-all" 
+                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/20 outline-none transition-all" 
                 />
               </div>
               <div className="space-y-3">
@@ -134,7 +134,7 @@ const Transactions = () => {
                   placeholder="e.g. Stripe Payout, Coffee"
                   value={newTx.description}
                   onChange={e => setNewTx({...newTx, description: e.target.value})}
-                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/20 outline-none transition-all placeholder:text-white/10" 
+                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/20 outline-none transition-all placeholder:text-white/10" 
                 />
               </div>
               <div className="space-y-3">
@@ -145,7 +145,7 @@ const Transactions = () => {
                   placeholder="25000"
                   value={newTx.amount}
                   onChange={e => setNewTx({...newTx, amount: e.target.value})}
-                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#A78BFA]/50 focus:ring-1 focus:ring-[#A78BFA]/20 outline-none transition-all placeholder:text-white/10" 
+                  className="w-full h-14 bg-black/40 border border-white/10 rounded-2xl px-6 text-sm text-white/90 focus:border-[#8fb697]/50 focus:ring-1 focus:ring-[#8fb697]/20 outline-none transition-all placeholder:text-white/10" 
                 />
               </div>
             </div>
@@ -153,7 +153,7 @@ const Transactions = () => {
             <div className="flex justify-end pt-4">
               <button 
                 type="submit" 
-                className="bg-[#A78BFA] text-black px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(167,139,250,0.4)] transition-all"
+                className="bg-[#8fb697] text-black px-10 py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] hover:shadow-[0_0_30px_rgba(167,139,250,0.4)] transition-all"
               >
                 Authenticate Record
               </button>
@@ -164,10 +164,10 @@ const Transactions = () => {
 
       {/* Ledger Table (Zero-Divider Layout) */}
       {/* Ledger Table */}
-      <SlideUp delay={0.2} className="bg-[#1A1625]/60 backdrop-blur-xl border border-purple-500/20 rounded-[32px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
+      <SlideUp delay={0.2} className="bg-[#25332c]/60 backdrop-blur-xl border border-purple-500/20 rounded-[32px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
         <div className="p-10 border-b border-purple-500/20 flex justify-between items-center">
            <div className="flex items-center gap-6 bg-black/40 border border-purple-500/20 px-6 py-3 rounded-full w-96 group focus-within:border-purple-500/50 transition-colors shrink-0">
-             <Search className="text-white/20 group-focus-within:text-[#A78BFA] transition-colors" size={18} />
+             <Search className="text-white/20 group-focus-within:text-[#8fb697] transition-colors" size={18} />
              <input 
                placeholder="Search protocol history..." 
                className="bg-transparent border-none focus:outline-none text-[11px] uppercase tracking-widest font-black w-full text-white/90 placeholder:text-white/20"
@@ -178,14 +178,14 @@ const Transactions = () => {
 
            {/* 🚀 Dynamic Metric Badges */}
            <div className="flex items-center gap-4 flex-1 justify-start ml-8">
-              <div className="bg-[#A78BFA]/5 border border-[#A78BFA]/20 px-5 py-2.5 rounded-2xl flex flex-col items-start min-w-[140px] shadow-[0_0_15px_rgba(167,139,250,0.05)]">
-                 <span className="text-[9px] font-black text-[#A78BFA] opacity-60 tracking-[0.2em] mb-0.5 uppercase">Total Income</span>
+              <div className="bg-[#8fb697]/5 border border-[#8fb697]/20 px-5 py-2.5 rounded-2xl flex flex-col items-start min-w-[140px] shadow-[0_0_15px_rgba(167,139,250,0.05)]">
+                 <span className="text-[9px] font-black text-[#8fb697] opacity-60 tracking-[0.2em] mb-0.5 uppercase">Total Income</span>
                  <span className="text-white font-black text-lg monos-num tracking-tight leading-none truncate w-full">
                     {formatCurrency(totalIncome)}
                  </span>
               </div>
-              <div className="bg-[#F472B6]/5 border border-[#F472B6]/20 px-5 py-2.5 rounded-2xl flex flex-col items-start min-w-[140px] shadow-[0_0_15px_rgba(244,114,182,0.05)]">
-                 <span className="text-[9px] font-black text-[#F472B6] opacity-60 tracking-[0.2em] mb-0.5 uppercase">Total Expense</span>
+              <div className="bg-[#d5ae73]/5 border border-[#d5ae73]/20 px-5 py-2.5 rounded-2xl flex flex-col items-start min-w-[140px] shadow-[0_0_15px_rgba(244,114,182,0.05)]">
+                 <span className="text-[9px] font-black text-[#d5ae73] opacity-60 tracking-[0.2em] mb-0.5 uppercase">Total Expense</span>
                  <span className="text-white font-black text-lg monos-num tracking-tight leading-none truncate w-full">
                     {formatCurrency(totalExpense)}
                  </span>
@@ -212,11 +212,11 @@ const Transactions = () => {
                 <tr key={idx} className="hover:bg-purple-500/5 transition-all duration-200 ease-in-out group">
                   <td className="px-10 py-10 monos-num text-sm text-white/40 tracking-tighter">{tx.date}</td>
                   <td className="px-10 py-10 font-display text-base font-bold tracking-tight text-white/90 group-hover:text-white transition-colors">{tx.description}</td>
-                  <td className={`px-10 py-10 text-right font-black text-lg tracking-tight monos-num ${tx.type === 'INCOME' ? 'text-[#A78BFA]' : 'text-[#F472B6]'}`}>
+                  <td className={`px-10 py-10 text-right font-black text-lg tracking-tight monos-num ${tx.type === 'INCOME' ? 'text-[#8fb697]' : 'text-[#d5ae73]'}`}>
                     {formatCurrency(tx.amount)}
                   </td>
                   <td className="px-10 py-10 text-right">
-                    <span className={`text-[11px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-transparent ${tx.type === 'INCOME' ? 'bg-[#A78BFA]/10 text-[#A78BFA] group-hover:border-[#A78BFA]/20' : 'bg-[#F472B6]/10 text-[#F472B6] group-hover:border-[#F472B6]/20'} transition-colors`}>
+                    <span className={`text-[11px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-transparent ${tx.type === 'INCOME' ? 'bg-[#8fb697]/10 text-[#8fb697] group-hover:border-[#8fb697]/20' : 'bg-[#d5ae73]/10 text-[#d5ae73] group-hover:border-[#d5ae73]/20'} transition-colors`}>
                       {tx.type}
                     </span>
                   </td>

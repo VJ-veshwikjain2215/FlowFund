@@ -12,11 +12,11 @@ import { formatCurrency } from '../utils/formatCurrency';
 
 const pageBgStyle = {
   background:
-    'radial-gradient(circle at 15% 25%, rgba(236,72,153,0.08), transparent 40%), radial-gradient(circle at 85% 75%, rgba(168,85,247,0.1), transparent 40%), #0b0b12',
+    'radial-gradient(circle at 15% 25%, rgba(236,72,153,0.08), transparent 40%), radial-gradient(circle at 85% 75%, rgba(168,85,247,0.1), transparent 40%), #19251f',
 };
 
 const glassCard =
-  'bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[32px] border border-purple-500/20 hover:border-purple-500/40 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(167,139,250,0.15)] transition-all duration-300 ease-out';
+  'bg-[#25332c]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[32px] border border-purple-500/20 hover:border-purple-500/40 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(167,139,250,0.15)] transition-all duration-300 ease-out';
 
 // status → colour config
 const getColorConfig = (status) => {
@@ -106,7 +106,7 @@ const ExpenseRow = ({ item, onUpdate, onDelete, canDelete }) => {
             onChange={e => setDraft(e.target.value)}
             onBlur={() => { onUpdate({ ...item, category: draft }); setEditing(false); }}
             onKeyDown={e => e.key === 'Enter' && e.target.blur()}
-            className="w-full bg-transparent border-b border-[#A78BFA] text-sm font-semibold text-white outline-none pb-0.5"
+            className="w-full bg-transparent border-b border-[#8fb697] text-sm font-semibold text-white outline-none pb-0.5"
           />
         ) : (
           <button onClick={() => setEditing(true)}
@@ -122,7 +122,7 @@ const ExpenseRow = ({ item, onUpdate, onDelete, canDelete }) => {
         <input
           type="number" value={item.amount === 0 ? '' : item.amount}
           onChange={e => onUpdate({ ...item, amount: parseFloat(e.target.value) || 0 })}
-          className="w-28 pl-7 pr-3 py-1.5 bg-black/30 border border-white/10 rounded-xl text-sm font-bold text-white text-right focus:border-[#A78BFA]/50 outline-none transition-all"
+          className="w-28 pl-7 pr-3 py-1.5 bg-black/30 border border-white/10 rounded-xl text-sm font-bold text-white text-right focus:border-[#8fb697]/50 outline-none transition-all"
           placeholder="0"
         />
       </div>
@@ -292,7 +292,7 @@ const VacationPlanner = () => {
         <SlideUp>
           <div className="flex items-end justify-between flex-wrap gap-6">
             <div>
-              <p className="text-[#A78BFA] text-[10px] uppercase tracking-[0.4em] font-bold mb-2 flex items-center gap-2">
+              <p className="text-[#8fb697] text-[10px] uppercase tracking-[0.4em] font-bold mb-2 flex items-center gap-2">
                 <Palmtree size={13} /> Break Planner
               </p>
               <h1 className="text-5xl font-black display-font leading-none">Break Runway</h1>
@@ -317,7 +317,7 @@ const VacationPlanner = () => {
                   <div className="w-px h-8 bg-white/10 hidden sm:block" />
                   <div>
                     <p className="text-[10px] font-black uppercase tracking-widest text-white/30 mb-1">Max Affordable Break</p>
-                    <p className={`text-xl font-black ${maxAffordable <= 0 ? 'text-red-400' : 'text-[#A78BFA]'}`}>
+                    <p className={`text-xl font-black ${maxAffordable <= 0 ? 'text-red-400' : 'text-[#8fb697]'}`}>
                       {maxAffordable} week{maxAffordable !== 1 ? 's' : ''}
                     </p>
                   </div>
@@ -377,7 +377,7 @@ const VacationPlanner = () => {
                 <div className="flex items-center justify-between">
                   <p className="text-[10px] font-black uppercase tracking-[0.25em] text-white/40">Monthly Expenses</p>
                   <button onClick={addExpense}
-                    className="flex items-center gap-1.5 text-[10px] font-bold text-[#A78BFA] uppercase tracking-widest hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 text-[10px] font-bold text-[#8fb697] uppercase tracking-widest hover:text-white transition-colors"
                   >
                     <Plus size={12} /> Add
                   </button>
@@ -420,7 +420,7 @@ const VacationPlanner = () => {
             {loading && (
               <SlideUp delay={0.15}>
                 <div className={`${glassCard} p-12 flex items-center justify-center`}>
-                  <div className="w-8 h-8 border-2 border-[#A78BFA] border-t-transparent rounded-full animate-spin" />
+                  <div className="w-8 h-8 border-2 border-[#8fb697] border-t-transparent rounded-full animate-spin" />
                 </div>
               </SlideUp>
             )}
@@ -514,8 +514,8 @@ const VacationPlanner = () => {
                           </div>
                           {/* 2. Projected Next Month Income */}
                           <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/5">
-                            <p className="text-[8px] text-[#A78BFA]/50 font-bold uppercase tracking-wider mb-0.5">Projected Income</p>
-                            <p className="text-sm font-black text-[#A78BFA]">{formatCurrency(projectedIncome)}</p>
+                            <p className="text-[8px] text-[#8fb697]/50 font-bold uppercase tracking-wider mb-0.5">Projected Income</p>
+                            <p className="text-sm font-black text-[#8fb697]">{formatCurrency(projectedIncome)}</p>
                           </div>
                           {/* 3. Monthly Expenses */}
                           <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/5">
@@ -530,7 +530,7 @@ const VacationPlanner = () => {
                           {/* 5. Break Cost */}
                           <div className="bg-white/5 rounded-xl px-4 py-3 border border-white/5">
                             <p className="text-[8px] text-white/30 font-bold uppercase tracking-wider mb-0.5">Total Break Cost</p>
-                            <p className="text-sm font-black text-[#F472B6]">{formatCurrency(required)}</p>
+                            <p className="text-sm font-black text-[#d5ae73]">{formatCurrency(required)}</p>
                           </div>
                           {/* 6. Remaining Savings */}
                           <div className={`rounded-xl px-4 py-3 border ${remaining < 0 ? 'bg-red-400/10 border-red-400/30' : 'bg-white/5 border-white/5'}`}>

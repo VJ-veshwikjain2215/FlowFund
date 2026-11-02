@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { authService } from '../services/authService';
+import { useFinanceStore } from './useFinanceStore';
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -23,6 +24,7 @@ export const useAuthStore = create((set) => ({
 
   logout: () => {
     localStorage.removeItem('token');
+    useFinanceStore.setState({ dashboard: null, cashBalance: null, transactions: [], isLoading: false, error: null, successMsg: null, rowErrors: [] });
     set({ token: null, user: null, error: null });
   },
 
@@ -99,6 +101,7 @@ export const useAuthStore = create((set) => ({
       return user;
     } catch (err) {
       localStorage.removeItem('token');
+      useFinanceStore.setState({ dashboard: null, cashBalance: null, transactions: [], isLoading: false, error: null, successMsg: null, rowErrors: [] });
       set({ user: null, token: null, isLoading: false });
       return null;
     }

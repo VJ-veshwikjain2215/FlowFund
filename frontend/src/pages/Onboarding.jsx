@@ -39,7 +39,7 @@ const Onboarding = () => {
   };
 
   const validateStep2 = () => {
-    if (Number(rent) < 0 || Number(groceries) < 0 || Number(utilities) < 0 || Number(internet) < 0 || Number(transport) < 0) {
+    if (Number(rent) < 0 || Number(groceries) < 0 || Number(utilities) < 0 || Number(internet) < 0 || Number(transport) < 0 || others.some(item => Number(item.value) < 0)) {
       return "Expenses cannot be negative.";
     }
     return null;
@@ -88,7 +88,7 @@ const Onboarding = () => {
       const success = await completeOnboarding({
         profession,
         incomeType: 'FREELANCE', // default
-        baseIncome: '50000', // default to prevent backend errors
+        baseIncome: '0',
         rent: String(rent || 0),
         groceries: String(groceries || 0),
         utilities: String(utilities || 0),
@@ -96,7 +96,7 @@ const Onboarding = () => {
         transport: String(transport || 0),
         age: Number(age),
         dependents: 0,
-        others: others.map(o => ({ ...o, value: String(o.value || 0) }))
+        otherExpenses: String(others.reduce((sum, item) => sum + (Number(item.value) || 0), 0))
       });
       
       if (success) {

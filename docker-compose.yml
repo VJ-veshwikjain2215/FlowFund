@@ -5,10 +5,10 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8080/api
     ports:
       - "3000:80"
-    environment:
-      - VITE_API_BASE_URL=http://localhost:8085/api
     networks:
       - flowfund-network
     depends_on:
@@ -19,11 +19,14 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8085:8085"
+      - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=${SUPABASE_DB_URL}
-      - SPRING_DATASOURCE_USERNAME=${SUPABASE_DB_USER}
-      - SPRING_DATASOURCE_PASSWORD=${SUPABASE_DB_PASSWORD}
+      - SUPABASE_DB_URL=${SUPABASE_DB_URL}
+      - SUPABASE_DB_USER=${SUPABASE_DB_USER}
+      - SUPABASE_DB_PASSWORD=${SUPABASE_DB_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is required}
+      - AI_SERVICE_SECRET=${AI_SERVICE_SECRET:?AI_SERVICE_SECRET is required}
+      - AI_SERVICE_URL=http://ai-service:8000
       - SPRING_DATASOURCE_DRIVER=org.postgresql.Driver
       - SPRING_JPA_DIALECT=org.hibernate.dialect.PostgreSQLDialect
       - ARIMA_API_URL=http://ai-service:8000
@@ -39,8 +42,8 @@ services:
     build: 
       context: ./ai-service
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+    environment:
+      - AI_SERVICE_SECRET=${AI_SERVICE_SECRET:?AI_SERVICE_SECRET is required}
     networks:
       - flowfund-network
 

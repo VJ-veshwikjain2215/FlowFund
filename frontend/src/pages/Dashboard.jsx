@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import BalanceInput from '../components/BalanceInput';
 import { useFinanceStore } from '../store/useFinanceStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -57,7 +58,8 @@ const Dashboard = () => {
 
   // 3. Unified Metrics Mapping (Atomic Synchronization)
   const hasRealData = dashboard?.has_data === true;
-  const currentSavings = dashboard?.safe_spend || 0;
+  const balance = useFinanceStore((state) => state.cashBalance);
+  const currentSavings = balance ?? 0;
   const savedAmount = currentSavings; // alias
   
   // 3a. Static Emergency Buffer Logic based ONLY on User's Onboarding Data
@@ -66,7 +68,7 @@ const Dashboard = () => {
   const profile = user; // alias for logic below
 
   const monthlyExpense =
-    (Number(user?.rent || 0) + Number(user?.groceries || 0) + Number(user?.utilities || 0) + Number(user?.internet || 0) + Number(user?.transport || 0)) ||
+    (Number(user?.rent || 0) + Number(user?.groceries || 0) + Number(user?.utilities || 0) + Number(user?.internet || 0) + Number(user?.transport || 0) + Number(user?.otherExpenses || 0)) ||
     user?.monthlyExpenses ||
     user?.totalMonthlyExpense ||
     0;
@@ -77,12 +79,6 @@ const Dashboard = () => {
   const emergencyBuffer = emergencyTarget > 0 ? Math.min((currentSavings / emergencyTarget) * 100, 100) : 0;
   const hasOnboardingExpense = emergencyTarget > 0;
 
-  console.log("📈 [SYNC] Dashboard Metrics Re-calculated:", {
-    user: user?.name,
-    monthlyExpense,
-    emergencyBuffer,
-    hasOnboardingExpense
-  });
 
   const safeMonths = monthlyExpense > 0 ? (currentSavings / monthlyExpense).toFixed(1) : "0.0";
 
@@ -112,9 +108,9 @@ const Dashboard = () => {
   }, [transactions]);
 
   const pieData = [
-    { name: 'Safe Spend', value: Math.max(dashboard?.safe_spend || 1, 1) },
+    { name: 'Estimated surplus', value: dashboard?.safe_spend || 0 },
     { name: 'Tax Buffer', value: dashboard?.tax_buffer || 0 },
-    { name: 'Emergency %', value: Math.max(emergencyBuffer, 0) }
+    { name: 'Estimated expenses', value: dashboard?.forecast_expense || 0 }
   ];
 
   const isNewUser = !isLoading && !hasRealData && (!transactions || transactions.length === 0);
@@ -183,7 +179,7 @@ const Dashboard = () => {
           </div>
           <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Upload your income file to begin</h2>
           <p className="text-white/60 mb-10 leading-relaxed font-medium">
-            Upload your latest CSV or bank statement to build your stability graph and safe-to-spend buffer.
+            Upload a CSV to view estimates based on your transaction history.
           </p>
           <label className="bg-gradient-to-r from-[#A78BFA] to-[#F472B6] hover:shadow-[0_0_20px_rgba(167,139,250,0.4)] hover:-translate-y-0.5 transition-all cursor-pointer text-white font-bold py-4 px-10 rounded-2xl flex items-center gap-2">
             {isLoading ? <Loader2 className="animate-spin" size={18} /> : <span>Choose CSV File</span>}
@@ -218,13 +214,13 @@ const Dashboard = () => {
             <div className="relative z-10 space-y-4">
               <h2 className="text-white/90 font-semibold text-base lg:text-lg uppercase tracking-widest flex items-center gap-2 text-shadow-sm">
                 <Wallet size={18} />
-                Money You Can Use
+                Estimated Monthly Surplus
               </h2>
               <div className="text-5xl lg:text-7xl font-black text-white tracking-tighter flex items-center gap-2 drop-shadow-md">
                 ₹{hasRealData ? <CountUp end={moneyYouCanUse} duration={2} separator="," /> : "--"}
               </div>
               <p className="text-white text-sm font-medium inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-sm mt-2">
-                <ShieldCheck size={16} /> {hasRealData ? "Safe to spend this month." : "No data available."}
+                <ShieldCheck size={16} /> {hasRealData ? "Estimate from imported activity, not your bank balance." : "No data available."}
               </p>
             </div>
           </div>
@@ -245,33 +241,35 @@ const Dashboard = () => {
           </div>
         </motion.div>
 
+        <BalanceInput />
+
         {/* SEC 2: 3 CORE CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             className={`${glassCardClass} ${glassHoverClass} flex items-center gap-6 ${!hasRealData ? 'opacity-50 pointer-events-none' : ''}`}>
             <CircularProgress percentage={emergencyBuffer} />
             <div>
-              <p className="text-white/40 text-sm font-bold uppercase tracking-wider mb-1">Emergency Buffer</p>
+              <p className="text-white/40 text-sm font-bold uppercase tracking-wider mb-1">Savings Coverage Estimate</p>
 
               <h3 className="text-white text-lg font-bold leading-tight">
-                {hasOnboardingExpense ? `You have ₹${Math.round(savedAmount).toLocaleString()} saved` : "Onboarding required"}
+                {balance != null && hasOnboardingExpense ? `You entered ₹${Math.round(savedAmount).toLocaleString()} saved` : "Enter savings to calculate coverage"}
               </h3>
 
               <p className="text-purple-300 text-xs mt-2 font-medium">
                 {hasOnboardingExpense ? `Target: ₹${Math.round(targetAmount).toLocaleString()}` : "Target: Not set"}
               </p>
 
-              {hasOnboardingExpense ? (
+              {balance != null && hasOnboardingExpense ? (
                 isOverspending ? (
-                  <p className="text-red-400 text-xs mt-1 font-bold">🚨 You are currently overspending. Start by stabilizing expenses.</p>
+                  <p className="text-red-400 text-xs mt-1 font-bold">🚨 Estimated income is below your entered monthly expenses.</p>
                 ) : (
                   <p className="text-green-400 text-xs mt-1 font-bold">
-                    You are financially safe for {safeMonths} months 🎉
+                    Estimated coverage: {safeMonths} months 🎉
                   </p>
                 )
               ) : (
                 <p className="text-yellow-400 text-xs mt-1 font-bold">
-                   ⚠️ Please update your monthly expenses in your profile.
+                   ⚠️ Enter savings and monthly expenses to estimate coverage.
                 </p>
               )}
             </div>
@@ -328,7 +326,7 @@ const Dashboard = () => {
                 />
               </div>
               <div className="flex justify-between items-center text-[9px] mt-0.5">
-                <span className="text-white/40 uppercase">Reliability Score</span>
+                <span className="text-white/40 uppercase">Data and stability indicator</span>
                 <span className="text-white/80">{reliability}%</span>
               </div>
             </div>
@@ -409,7 +407,7 @@ const Dashboard = () => {
 
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                 className={`${glassCardClass} h-[300px] flex flex-col items-center justify-between p-6`}>
-                <h3 className="text-base font-bold text-white w-full text-left">Money Breakdown</h3>
+                <h3 className="text-base font-bold text-white w-full text-left">Estimated Monthly Breakdown</h3>
                 <div className="w-full flex-1 relative flex items-center justify-center -mt-6">
                   <ResponsiveContainer width="100%" height={160}>
                     <PieChart>
@@ -422,8 +420,8 @@ const Dashboard = () => {
                 </div>
                 <div className="w-full pt-4 flex justify-between gap-2 border-t border-white/5 text-[11px] font-bold text-white/50">
                   <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#A78BFA] shadow-[0_0_8px_rgba(167,139,250,0.5)]" /> Usable</div>
-                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#F472B6] shadow-[0_0_8px_rgba(244,114,182,0.5)]" /> Tax</div>
-                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#FDBA74] shadow-[0_0_8px_rgba(253,186,116,0.5)]" /> Buffer</div>
+                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#F472B6] shadow-[0_0_8px_rgba(244,114,182,0.5)]" /> Illustrative tax</div>
+                  <div className="flex items-center gap-1.5"><div className="w-2.5 h-2.5 rounded-sm bg-[#FDBA74] shadow-[0_0_8px_rgba(253,186,116,0.5)]" /> Expenses</div>
                 </div>
               </motion.div>
             </div>

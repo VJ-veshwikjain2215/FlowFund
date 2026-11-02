@@ -58,7 +58,7 @@ def main():
         add_bytes(archive, "railpack.json", json.dumps(railpack, indent=2).encode())
 
     with tarfile.open(OUTPUT / "ai-service.tar.gz", "w:gz") as archive:
-        for name in ("main.py", "requirements.txt", "runtime.txt"):
+        for name in ("main.py", "requirements.txt", "runtime.txt", ".python-version", "embarko.json"):
             add_bytes(archive, name, (ROOT / "ai-service" / name).read_bytes())
     print("Created frontend.tar.gz, backend.tar.gz and ai-service.tar.gz in", OUTPUT)
 

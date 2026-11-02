@@ -6,13 +6,16 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 import java.nio.charset.StandardCharsets;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class JwtUtil {
-    // 🛡️ Standardized Secret Key for Persistent Identity Handshakes
-    private final String SECRET = "v3ry_s3cr3t_fl0w_fund_s3cur1ty_k3y_2026_premium_os";
-    private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+    private final Key key;
     private final long expiration = 86400000; // 24h
+
+    public JwtUtil(@Value("${app.jwt.secret}") String secret) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
 
     public String generateToken(String email) {
         return Jwts.builder()
@@ -31,7 +34,7 @@ public class JwtUtil {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
-        } catch (JwtException e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return null; // Identity establishes failure
         }
     }

@@ -1,3 +1,4 @@
+import BalanceInput from '../components/BalanceInput';
 import React, { useEffect } from 'react';
 import { useFinanceStore } from '../store/useFinanceStore';
 import { useAuthStore } from '../store/useAuthStore';
@@ -15,9 +16,10 @@ const HealthScore = () => {
   }, [fetchDashboard]);
 
   // 1. Data Retrieval
-  const moneyYouCanSpend = dashboard?.safe_spend || 0;
+  const balance = useFinanceStore((state) => state.cashBalance);
+  const moneyYouCanSpend = balance ?? 0;
   const monthlyExpenses =
-    (Number(user?.rent || 0) + Number(user?.groceries || 0) + Number(user?.utilities || 0) + Number(user?.internet || 0) + Number(user?.transport || 0)) ||
+    (Number(user?.rent || 0) + Number(user?.groceries || 0) + Number(user?.utilities || 0) + Number(user?.internet || 0) + Number(user?.transport || 0) + Number(user?.otherExpenses || 0)) ||
     Number(user?.monthlyExpenses || 0) ||
     Number(user?.totalMonthlyExpense || 0) ||
     0;
@@ -67,7 +69,7 @@ const HealthScore = () => {
 
   // 4. Risk Level Mapping
   const getRiskDetails = (score) => {
-    if (score === 100) return { label: 'NO RISK', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20 shadow-[0_0_15px_rgba(74,222,128,0.3)]' };
+    if (score === 100) return { label: 'LOW', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20 shadow-[0_0_15px_rgba(74,222,128,0.3)]' };
     if (score >= 71)   return { label: 'LOW', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20' };
     if (score >= 46)   return { label: 'MEDIUM', color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/20' };
     return { label: 'HIGH', color: 'text-red-400', bg: 'bg-red-400/10 border-red-400/20 shadow-[0_0_15px_rgba(248,113,113,0.2)]' };
@@ -77,7 +79,7 @@ const HealthScore = () => {
 
   // Status mapping for central pill
   const getStatus = (s) => {
-    if (s === 100) return { label: 'OPTIMAL', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20' };
+    if (s === 100) return { label: 'STRONG COVERAGE', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20' };
     if (s >= 71)   return { label: 'STABLE', color: 'text-[#A78BFA]', bg: 'bg-[#A78BFA]/10 border-[#A78BFA]/20' };
     if (s >= 46)   return { label: 'NEEDS ATTENTION', color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/20' };
     return { label: 'CRITICAL', color: 'text-red-400', bg: 'bg-red-400/10 border-red-400/20' };
@@ -91,6 +93,8 @@ const HealthScore = () => {
 
   const glassCardBase = "bg-[#1A1625]/60 backdrop-blur-xl border border-white/5 rounded-[32px] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out flex flex-col justify-between";
 
+  if (balance == null || monthlyExpenses <= 0) return <div className="p-8 text-white space-y-4"><h1>Financial Health</h1><p>Enter savings and add monthly expenses to your profile to estimate coverage.</p><BalanceInput /></div>;
+
   return (
     <div className="min-h-screen p-6 lg:p-10 pb-24 text-white font-body selection:bg-[#A78BFA] selection:text-white" style={pageBgStyle}>
       <div className="max-w-[1200px] mx-auto space-y-16 flex flex-col items-center justify-center min-h-[80vh]">
@@ -102,6 +106,8 @@ const HealthScore = () => {
           <h1 className="text-5xl font-black display-font">Financial Health</h1>
         </SlideUp>
 
+        <BalanceInput />
+        <p className="text-white/60 text-sm">A simple coverage estimate, not a guarantee of financial safety.</p>
         {/* Main Score Circular Element */}
         <KineticScale delay={0.2} className="relative w-80 h-80 flex items-center justify-center p-2 rounded-full border border-purple-500/20 bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_0_60px_rgba(167,139,250,0.15)] hover:shadow-[0_0_80px_rgba(167,139,250,0.3)] transition-all duration-500 group">
           <div className="absolute inset-x-0 inset-y-0 rounded-full border-4 border-[#A78BFA]/30 group-hover:border-[#A78BFA]/50 group-hover:rotate-180 transition-all duration-1000 ease-in-out border-dashed opacity-50" />

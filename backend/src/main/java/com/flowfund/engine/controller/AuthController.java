@@ -16,6 +16,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody com.flowfund.engine.dto.RegistrationRequest req) {
+        if (req.getName() == null || req.getName().isBlank() || req.getEmail() == null ||
+                !req.getEmail().matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$") ||
+                req.getPassword() == null || req.getPassword().length() < 8 || req.getPassword().length() > 72) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Enter a name, valid email and password of 8 to 72 characters");
+        }
         User user = new User();
         user.setName(req.getName());
         user.setEmail(req.getEmail());
@@ -35,10 +40,10 @@ public class AuthController {
     public Map<String, Object> login(@RequestBody Map<String, String> req) {
         String email = req.get("email");
         String rawPassword = req.get("password");
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = email == null ? null : userRepository.findByEmail(email).orElse(null);
         
-        if (!passwordEncoder.matches(rawPassword, user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+        if (user == null || rawPassword == null || user.getPassword() == null || !passwordEncoder.matches(rawPassword, user.getPassword())) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Invalid credentials");
         }
         String token = jwtUtil.generateToken(user.getEmail());
         

@@ -3,6 +3,8 @@ import { financeService } from '../services/financeService';
 
 export const useFinanceStore = create((set) => ({
   dashboard: null,
+  cashBalance: null,
+  setCashBalance: (cashBalance) => set({ cashBalance }),
   transactions: [],
   isLoading: false,
   error: null,
@@ -28,14 +30,17 @@ export const useFinanceStore = create((set) => ({
       insights: data.insights ?? ["No patterns detected yet."],
       reliability: data.reliability ?? 0,
       forecast_expense: data.forecast_expense ?? 0,
+      data_points: data.data_points ?? 0,
+      tax_buffer: data.tax_buffer ?? 0,
+      model_used: data.model_used ?? null,
       forecast_series: data.forecast_series ?? data.forecastSeries ?? []
     };
 
-    console.log("🛠️ [ADAPTER] Unified financial state generated:", normalized);
     return normalized;
   },
 
   fetchDashboard: async () => {
+    const sessionToken = localStorage.getItem('token');
     const { normalizeDashboardData } = useFinanceStore.getState();
     set({ isLoading: true });
     try {
@@ -43,28 +48,32 @@ export const useFinanceStore = create((set) => ({
         financeService.getBuffer(),
         financeService.getTransactions()
       ]);
+      if (sessionToken !== localStorage.getItem('token')) return;
       const dashboard = normalizeDashboardData(rawDashboard);
-      set({ dashboard, transactions, isLoading: false });
+      set({ dashboard, transactions, error: null, isLoading: false });
     } catch (err) {
+      if (sessionToken !== localStorage.getItem('token')) return;
       console.error("❌ [INTEGRITY] Sync failed:", err);
       set({ error: 'System Fetch Failed', isLoading: false });
     }
   },
 
   uploadSync: async (file) => {
+    const sessionToken = localStorage.getItem('token');
     const { normalizeDashboardData } = useFinanceStore.getState();
     set({ isLoading: true, error: null, rowErrors: [], successMsg: null });
     try {
       console.log("📂 [INTEGRITY] Uploading CSV for full engine re-sync...");
       const response = await financeService.calculate(file);
+      if (sessionToken !== localStorage.getItem('token')) return false;
       const [rawDashboard, transactions] = await Promise.all([
         financeService.getBuffer(),
         financeService.getTransactions()
       ]);
       
       const dashboard = normalizeDashboardData(rawDashboard);
-      console.log("📈 [INTEGRITY] Post-upload sync complete:", { dashboard, transactions });
 
+      if (sessionToken !== localStorage.getItem('token')) return false;
       if (response && response.errors && response.errors.length > 0) {
          set({ rowErrors: response.errors, error: 'Some rows contained errors.', dashboard, transactions, isLoading: false });
       } else {
@@ -74,6 +83,7 @@ export const useFinanceStore = create((set) => ({
       }
       return true;
     } catch (err) {
+      if (sessionToken !== localStorage.getItem('token')) return false;
       console.error("🏁 [INTEGRITY] Upload failed:", err);
       set({ error: err.message || 'Sync System Offline', rowErrors: [], isLoading: false });
       return false;

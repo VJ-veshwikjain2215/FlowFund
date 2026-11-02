@@ -1,3 +1,4 @@
+import BalanceInput from '../components/BalanceInput';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SlideUp } from '../components/AnimatedWrapper';
@@ -14,7 +15,8 @@ const Planner = () => {
   }, [dashboard, fetchDashboard]);
 
   // 1. DATA INTEGRATION (ZERO HARDCODING)
-  const currentSavings     = dashboard?.safe_spend || 0;
+  const balance = useFinanceStore((state) => state.cashBalance);
+  const currentSavings = balance ?? 0;
   const predictedIncome    = dashboard?.prediction?.expected || 0;
   const monthlyExpenses    = dashboard?.forecast_expense || 0;
   
@@ -50,6 +52,8 @@ const Planner = () => {
   const glassCardClass = "bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.3)] rounded-[32px] p-8 border border-purple-500/20 hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(167,139,250,0.2)] hover:border-purple-500/40 transition-all duration-300 ease-out";
   const labelClass = "text-[10px] font-black uppercase tracking-[0.2em] text-white/40 mb-2 block";
 
+  if (balance == null) return <div className="p-8 text-white space-y-4"><h1>Spending Planner</h1><p>Enter available savings to calculate affordability.</p><BalanceInput /></div>;
+
   return (
     <div className="min-h-screen p-6 lg:p-10 pb-24 font-body text-white selection:bg-[#A78BFA] selection:text-white" style={pageBgStyle}>
       <div className="max-w-[1200px] mx-auto space-y-12">
@@ -67,6 +71,7 @@ const Planner = () => {
           )}
         </header>
 
+        <BalanceInput />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
           {/* ROW 1: Plan Budget (Left) */}

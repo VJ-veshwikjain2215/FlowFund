@@ -1,5 +1,7 @@
 # FlowFund | The Financial Operating System 🌊
 
+> **Deployment status:** Not production-ready until the security and end-to-end checks in [DEPLOYMENT_READINESS.md](DEPLOYMENT_READINESS.md) pass. The current CSV dashboard provides rule-based estimates; it does not move money or provide ARIMA forecasts. Claims below describing those capabilities are aspirational.
+
 FlowFund is a production-grade Financial Operating System (OS) designed for the modern freelance economy. It provides automated income stabilization, predictive financial forecasting, and risk-aware buffer management.
 
 ---

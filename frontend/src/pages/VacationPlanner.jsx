@@ -1,3 +1,4 @@
+import BalanceInput from '../components/BalanceInput';
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SlideUp, FadeIn } from '../components/AnimatedWrapper';
@@ -162,7 +163,8 @@ const VacationPlanner = () => {
   const projectedIncome = dashboard?.prediction?.expected || 0;
 
   // 3. Current Savings / Available Balance
-  const availableSavings = dashboard?.safe_spend || 0;
+  const balance = useFinanceStore((state) => state.cashBalance);
+  const availableSavings = balance ?? 0;
 
   // ── Sync with Dashboard on Load ──
   useEffect(() => {
@@ -182,11 +184,7 @@ const VacationPlanner = () => {
     push('Utilities', user?.utilities);
     push('Internet', user?.internet);
     push('Transport', user?.transport);
-    if (!rows.length) rows.push(
-      { id: 'rent',      category: 'Rent',      amount: 15000 },
-      { id: 'groceries', category: 'Groceries', amount: 8000  },
-      { id: 'utilities', category: 'Utilities', amount: 3000  },
-    );
+    push('Other expenses', user?.otherExpenses);
     return rows;
   };
 
@@ -220,16 +218,19 @@ const VacationPlanner = () => {
         setResult(data);
         setSelectedWeeks(w => Math.min(w, Math.max(data.maxWeeks || data.survivalWeeks, 1)));
       }
+    } catch (err) {
+      setResult(null);
+      setValidationErr(err.message || 'Unable to calculate the break plan.');
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [dashboard?.prediction?.expected]);
 
   // Debounced recalc on safeFund or expense change
   useEffect(() => {
     const t = setTimeout(() => calculate(safeFund, expenses, selectedWeeks), 350);
     return () => clearTimeout(t);
-  }, [safeFund, expenses, calculate]);
+  }, [safeFund, expenses, selectedWeeks, calculate]);
 
   // ── Core Logic & Calculations (Requested Implementation) ──
   /*
@@ -237,7 +238,7 @@ const VacationPlanner = () => {
     1. currentMonthlyIncome: Derived from latest 'INCOME' transactions
     2. projectedIncome: Derived from AI forecasting (dashboard.prediction.expected)
     3. monthlyExpenses: Sum of user-editable expense list (defaulted to profile data)
-    4. availableSavings: Derived from dashboard.safe_spend
+    4. availableSavings: Entered by the user for this session
     
     FORMULAS:
     - weeklyExpense = monthlyExpenses / 4
@@ -281,6 +282,8 @@ const VacationPlanner = () => {
     ? '⚖️ This is manageable but plan carefully.'
     : '⚠️ Your balance may run out soon.');
 
+  if (balance == null) return <div className="p-8 text-white space-y-4"><h1>Break Planner</h1><p>Enter available savings to estimate your runway.</p><BalanceInput /></div>;
+
   return (
     <div className="min-h-screen p-6 lg:p-10 pb-28 font-body text-white" style={pageBgStyle}>
       <div className="max-w-[1200px] mx-auto space-y-10">
@@ -301,6 +304,7 @@ const VacationPlanner = () => {
         </SlideUp>
 
         {/* ── FINANCIAL SUMMARY BAR ── */}
+        <BalanceInput />
         {monthlyTotal > 0 && (
           <SlideUp delay={0.05}>
             <div className={`${glassCard} px-6 py-4`}>

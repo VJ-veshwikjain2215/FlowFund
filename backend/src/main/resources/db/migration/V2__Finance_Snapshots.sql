@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS finance_snapshots (
+    user_id BIGINT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    payload TEXT NOT NULL
+);

@@ -152,7 +152,7 @@ const Dashboard = () => {
             <div className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md bg-gradient-to-br from-[#A78BFA] to-[#F472B6]">
               <div className="w-3.5 h-3.5 bg-white rounded-sm rotate-45" />
             </div>
-            <div className="font-black display-font tracking-tighter text-white text-2xl scale-y-110">RupeeRakshak</div>
+            <div className="font-black display-font tracking-tighter text-white text-2xl scale-y-110">FlowFund</div>
           </div>
         </header>
 
@@ -479,3 +479,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

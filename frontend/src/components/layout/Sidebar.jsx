@@ -31,7 +31,7 @@ const Sidebar = () => {
       {/* Brand Identity */}
       <div className="p-8 mb-6">
         <div className="text-xl font-bold tracking-tight display-font text-white flex items-center gap-2">
-          RupeeRakshak
+          FlowFund
         </div>
       </div>
 
@@ -77,3 +77,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

@@ -86,7 +86,7 @@ const Auth = () => {
               <div className="w-3.5 h-3.5 bg-white rounded-sm rotate-45" />
             </div>
             <div className="text-xl font-black display-font tracking-tighter text-white uppercase">
-              RupeeRakshak
+              FlowFund
             </div>
           </Link>
           <div className="text-[10px] font-black uppercase tracking-widest text-white/30 border border-white/5 px-4 py-2 rounded-full cursor-pointer hover:bg-white/5 transition-all flex items-center gap-2">
@@ -293,7 +293,7 @@ const Auth = () => {
         <div className="absolute inset-0 z-0">
           <img 
             src="/assets/auth_panel_graphic.png" 
-            alt="RupeeRakshak Architecture" 
+            alt="FlowFund Architecture" 
             className="w-full h-full object-cover opacity-30 scale-105 pointer-events-none grayscale sepia-[20%] hue-rotate-[260deg]" 
           />
         </div>
@@ -347,3 +347,4 @@ const Auth = () => {
 };
 
 export default Auth;
+

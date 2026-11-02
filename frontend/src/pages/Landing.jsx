@@ -50,7 +50,7 @@ const Landing = () => {
               className="text-[16px] font-black text-white whitespace-nowrap tracking-tighter"
               style={{ fontFamily: 'Inter, sans-serif', letterSpacing: '-0.03em' }}
             >
-              RupeeRakshak
+              FlowFund
             </span>
           </Link>
 
@@ -132,7 +132,7 @@ const Landing = () => {
             >
               <div className="w-4 h-4 bg-white rounded-[3px] rotate-45" />
             </div>
-            <span className="text-[14px] font-black text-white tracking-tighter">RupeeRakshak</span>
+            <span className="text-[14px] font-black text-white tracking-tighter">FlowFund</span>
           </Link>
           <div className="flex items-center gap-2.5">
             <Link
@@ -667,7 +667,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-16 md:gap-24 relative z-30">
           <div className="lg:col-span-2 space-y-12">
             <div className="flex items-center gap-3">
-              <div className="text-3xl font-black display-font tracking-tighter text-white">RupeeRakshak</div>
+              <div className="text-3xl font-black display-font tracking-tighter text-white">FlowFund</div>
               <div className="w-9 h-9 female-bg-gradient rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/20">
                 <div className="w-5 h-5 bg-black rounded-sm rotate-45" />
               </div>
@@ -713,7 +713,7 @@ const Landing = () => {
 
         <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 relative z-30">
           <div className="text-[10px] tracking-[0.4em] font-black text-white/10 uppercase">
-            © 2026 RupeeRakshak. Supporting the independent workforce.
+            © 2026 FlowFund. Supporting the independent workforce.
           </div>
           <div className="flex gap-8 text-[10px] tracking-[0.4em] font-black text-white/10 uppercase">
             <a href="#" className="hover:text-white transition-colors">Legal Mesh</a>

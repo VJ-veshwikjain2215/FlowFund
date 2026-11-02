@@ -225,7 +225,7 @@ const Landing = () => {
 
             <p className="text-lg md:text-2xl max-w-2xl leading-relaxed mb-12 text-white/50 font-medium">
               You work hard, but your income isn’t consistent. <br />
-              We help you <span className="text-white/90">predict, plan, and protect</span> your money — automatically.
+              We help you <span className="text-white/90">predict and plan</span> for your finances.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-12">
@@ -369,7 +369,7 @@ const Landing = () => {
               <div className="w-7 h-7 rounded-xl flex items-center justify-center text-sm" style={{ background: 'linear-gradient(135deg, #F472B640, #F472B620)' }}>🛡️</div>
               <div>
                 <p className="text-[11px] font-black text-white leading-none">₹8,000 saved to buffer</p>
-                <p className="text-[9px] text-white/35 mt-0.5">Auto-transferred · secure</p>
+                <p className="text-[9px] text-white/35 mt-0.5">Illustrative savings goal</p>
               </div>
             </motion.div>
 
@@ -497,9 +497,9 @@ const Landing = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { title: "We track your income", desc: "Automated monitoring of every invoice and payment.", icon: <Globe size={20} /> },
+              { title: "Review your income", desc: "Import your financial data to see your income history.", icon: <Globe size={20} /> },
               { title: "We predict what’s coming", desc: "Our engine forecasts your next 30 days of cash flow.", icon: <Cpu size={20} /> },
-              { title: "We automatically save", desc: "Smart buffers set aside money before you can spend it.", icon: <Zap size={20} /> },
+              { title: "Plan a buffer", desc: "Use your insights to set a savings goal.", icon: <Zap size={20} /> },
               { title: "You stay stable", desc: "Continuous protection, no matter the season.", icon: <Shield size={20} /> }
             ].map((item, i) => (
               <div key={i} className={`p-10 glass-card rounded-[40px] border-white/5 space-y-6 hover:translate-y-[-8px] transition-transform duration-500 ${i % 2 !== 0 ? 'lg:mt-12' : ''}`}>
@@ -525,7 +525,7 @@ const Landing = () => {
                 <h2 className="text-3xl md:text-5xl font-black display-font tracking-tight mb-8">Smart Predictions. <br /><span className="female-gradient italic">Real Results.</span></h2>
                 <p className="text-lg text-white/50 leading-relaxed mb-10">
                   We analyze your past income patterns to estimate what you’ll earn next.
-                  Then we automatically create a financial buffer — <span className="text-white/90">so you're always prepared.</span>
+                  Use your insights to plan a financial buffer — <span className="text-white/90">and prepare for uneven income.</span>
                 </p>
                 <div className="inline-flex px-4 py-2 rounded-lg bg-white/5 border border-white/5 text-[10px] font-black uppercase tracking-[0.3em] text-white/30 italic">
                   Built using advanced forecasting models.
@@ -590,8 +590,8 @@ const Landing = () => {
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8">
               {[
                 { title: "Know your income", desc: "No more guessing what's coming next month." },
-                { title: "Automatic savings", desc: "Zero brain cycles spent on manually moving money." },
-                { title: "A growing buffer", desc: "Your safety net builds itself in the background." },
+                { title: "Savings planning", desc: "Make a plan for setting money aside." },
+                { title: "A buffer goal", desc: "Track a target for your financial safety net." },
                 { title: "Less money anxiety", desc: "Focus on your work, we handle the rest." }
               ].map((item, i) => (
                 <div key={i} className="space-y-4 p-8 glass-card border-white/5 rounded-[32px]">
@@ -610,7 +610,7 @@ const Landing = () => {
               </p>
               <div className="flex flex-col gap-4">
                 <div className="px-6 py-4 border border-white/5 rounded-2xl text-[10px] uppercase font-black tracking-widest text-white/30 italic">Direct Peace of Mind</div>
-                <div className="px-6 py-4 border border-pink-500/10 rounded-2xl text-[10px] uppercase font-black tracking-widest text-pink-400/60">Automated protection</div>
+                <div className="px-6 py-4 border border-pink-500/10 rounded-2xl text-[10px] uppercase font-black tracking-widest text-pink-400/60">Financial planning insights</div>
               </div>
             </div>
           </div>
@@ -620,15 +620,15 @@ const Landing = () => {
         <section id="security" className="mt-56 max-w-6xl mx-auto w-full text-center">
           <FadeIn>
             <h2 className="text-4xl md:text-7xl font-black display-font tracking-tighter mb-8 leading-tight">
-              Your Money. Your Control. <br /><span className="opacity-20">Always Safe.</span>
+              Your Money. Your Control. <br /><span className="opacity-20">Plan With Clarity.</span>
             </h2>
             <p className="text-lg text-white/40 mb-20 italic">“Your financial safety is not optional.”</p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { title: "Bank-Level Encryption", icon: <Lock />, desc: "Your data is protected by the same standards as the world's leading banks." },
-                { title: "Secure Login", icon: <User />, desc: "Multi-factor authentication ensures only you have access." },
-                { title: "No Data Selling", icon: <Shield />, desc: "We never sell your personal or financial information. Ever." }
+                { title: "Your Account", icon: <Lock />, desc: "Sign in to access your financial snapshot." },
+                { title: "Your Data", icon: <User />, desc: "Your account keeps your financial information separate from other users." },
+                { title: "Your Decisions", icon: <Shield />, desc: "Use the insights as a starting point for your own financial planning." }
               ].map((item, i) => (
                 <div key={i} className="p-12 glass-card rounded-[40px] space-y-6 text-left border-white/5 hover:border-purple-500/10 transition-all">
                   <div className="w-12 h-12 female-bg-gradient rounded-2xl flex items-center justify-center text-white shadow-xl shadow-purple-500/20">
@@ -651,7 +651,7 @@ const Landing = () => {
                 You Deserve Stability — <br /><span className="female-gradient italic text-5xl md:text-8xl">Even Without a Fixed Salary.</span>
               </h2>
               <p className="text-xl md:text-2xl text-white/40 mb-16 font-medium leading-relaxed">
-                Start building your safety net today. Automatically. <br />
+                Start planning your safety net today. <br />
                 <span className="text-white/60">You didn’t choose freelancing to stress about money.</span>
               </p>
               <Link to="/auth" className="inline-flex px-16 py-8 button-primary text-[15px] shadow-2xl shadow-purple-500/30">
@@ -701,7 +701,7 @@ const Landing = () => {
             <div className="space-y-6">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full female-bg-gradient animate-pulse"></div>
-                <span className="text-[10px] uppercase font-black tracking-widest text-pink-400/80">Systems Online</span>
+                <span className="text-[10px] uppercase font-black tracking-widest text-pink-400/80">Financial planning</span>
               </div>
               <p className="text-[13px] text-white/80 font-black leading-tight tracking-tight uppercase">
                 Predict. Plan. Protect.<br />
@@ -726,3 +726,4 @@ const Landing = () => {
 };
 
 export default Landing;
+

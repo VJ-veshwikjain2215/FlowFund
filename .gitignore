@@ -99,3 +99,8 @@ venv.bak/
 test_income.csv
 .env
 application.properties
+# Local build diagnostics
+/backend_logs_temp.txt
+/mvn_check.txt
+/backend/backend_log*.txt
+/backend/build_log.txt

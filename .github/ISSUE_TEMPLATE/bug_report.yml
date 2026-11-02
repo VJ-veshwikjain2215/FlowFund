@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a reproducible problem in FlowFund.
+title: "[Bug] "
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where did it happen?
+      options:
+        - Sign-in or onboarding
+        - CSV import or dashboard
+        - Planning
+        - Local setup
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use synthetic transactions and omit credentials or personal financial data.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened and what did you expect?
+    validations:
+      required: true

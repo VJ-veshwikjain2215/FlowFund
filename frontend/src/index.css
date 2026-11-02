@@ -4,9 +4,9 @@
   --font-display: "Manrope", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  --color-primary: #a78bfa;
-  --color-secondary: #f472b6;
-  --color-background-dark: #0b0b0f;
+  --color-primary: #8fb697;
+  --color-secondary: #d5ae73;
+  --color-background-dark: #19251f;
   --color-accent-purple: #8b5cf6;
   --color-accent-pink: #ec4899;
 
@@ -14,13 +14,13 @@
 }
 
 :root {
-  --bg-main: #0b0b0f;
-  --bg-card: #121218;
+  --bg-main: #19251f;
+  --bg-card: #26342c;
   --border: rgba(255, 255, 255, 0.08);
 
-  --primary: #a78bfa;
+  --primary: #8fb697;
   --primary-soft: #c4b5fd;
-  --primary-pink: #f472b6;
+  --primary-pink: #d5ae73;
   --primary-dark: #7c3aed;
 
   --text-main: #ffffff;
@@ -86,7 +86,7 @@ h4,
 
 /* Button Refinement */
 .button-primary {
-  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  background: linear-gradient(135deg, #8fb697, #d5ae73);
   border-radius: 9999px;
   color: white;
   font-weight: 700;
@@ -115,13 +115,13 @@ h4,
 }
 
 .female-gradient {
-  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  background: linear-gradient(135deg, #8fb697, #d5ae73);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .female-bg-gradient {
-  background: linear-gradient(135deg, #a78bfa, #f472b6);
+  background: linear-gradient(135deg, #8fb697, #d5ae73);
 }
 
 .glass-card {

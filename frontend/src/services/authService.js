@@ -22,8 +22,8 @@ export const authService = {
     return response.data; // Returns updated user
   },
 
-  getMe: async () => {
-    const response = await axios.get(`${API_URL}/users/me`, getAuthHeader());
+  getMe: async (token) => {
+    const response = await axios.get(`${API_URL}/users/me`, token ? { headers: { Authorization: `Bearer ${token}` } } : getAuthHeader());
     return response.data;
   },
 
@@ -39,3 +39,4 @@ export const authService = {
 };
 
 export default authService;
+

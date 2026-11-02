@@ -35,8 +35,8 @@ function App() {
 
   if (bootstrapping) {
     return (
-      <div className="h-screen w-full bg-[#0b0b12] flex flex-col items-center justify-center">
-        <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-2xl animate-pulse" style={{ background: 'linear-gradient(135deg, #F472B6 0%, #A78BFA 100%)' }}>
+      <div className="h-screen w-full bg-[#19251f] flex flex-col items-center justify-center">
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 shadow-2xl animate-pulse" style={{ background: 'linear-gradient(135deg, #d5ae73 0%, #8fb697 100%)' }}>
           <div className="w-4 h-4 bg-white rounded-sm rotate-45" />
         </div>
         <div className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 animate-pulse">

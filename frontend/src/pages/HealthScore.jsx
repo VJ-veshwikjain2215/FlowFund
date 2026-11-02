@@ -80,7 +80,7 @@ const HealthScore = () => {
   // Status mapping for central pill
   const getStatus = (s) => {
     if (s === 100) return { label: 'STRONG COVERAGE', color: 'text-green-400', bg: 'bg-green-400/10 border-green-400/20' };
-    if (s >= 71)   return { label: 'STABLE', color: 'text-[#A78BFA]', bg: 'bg-[#A78BFA]/10 border-[#A78BFA]/20' };
+    if (s >= 71)   return { label: 'STABLE', color: 'text-[#8fb697]', bg: 'bg-[#8fb697]/10 border-[#8fb697]/20' };
     if (s >= 46)   return { label: 'NEEDS ATTENTION', color: 'text-yellow-400', bg: 'bg-yellow-400/10 border-yellow-400/20' };
     return { label: 'CRITICAL', color: 'text-red-400', bg: 'bg-red-400/10 border-red-400/20' };
   };
@@ -88,19 +88,19 @@ const HealthScore = () => {
   const status = getStatus(healthScore);
 
   const pageBgStyle = {
-    background: 'radial-gradient(circle at 20% 30%, rgba(236,72,153,0.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.08), transparent 40%), #0b0b12'
+    background: 'radial-gradient(circle at 20% 30%, rgba(236,72,153,0.08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(168,85,247,0.08), transparent 40%), #19251f'
   };
 
-  const glassCardBase = "bg-[#1A1625]/60 backdrop-blur-xl border border-white/5 rounded-[32px] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out flex flex-col justify-between";
+  const glassCardBase = "bg-[#25332c]/60 backdrop-blur-xl border border-white/5 rounded-[32px] p-8 shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-300 ease-out flex flex-col justify-between";
 
   if (balance == null || monthlyExpenses <= 0) return <div className="p-8 text-white space-y-4"><h1>Financial Health</h1><p>Enter savings and add monthly expenses to your profile to estimate coverage.</p><BalanceInput /></div>;
 
   return (
-    <div className="min-h-screen p-6 lg:p-10 pb-24 text-white font-body selection:bg-[#A78BFA] selection:text-white" style={pageBgStyle}>
+    <div className="min-h-screen p-6 lg:p-10 pb-24 text-white font-body selection:bg-[#8fb697] selection:text-white" style={pageBgStyle}>
       <div className="max-w-[1200px] mx-auto space-y-16 flex flex-col items-center justify-center min-h-[80vh]">
         
         <SlideUp className="space-y-4 text-center">
-          <p className="text-[#A78BFA] text-[10px] uppercase tracking-[0.4em] font-bold flex justify-center items-center gap-2">
+          <p className="text-[#8fb697] text-[10px] uppercase tracking-[0.4em] font-bold flex justify-center items-center gap-2">
              Composite System Score
           </p>
           <h1 className="text-5xl font-black display-font">Financial Health</h1>
@@ -109,8 +109,8 @@ const HealthScore = () => {
         <BalanceInput />
         <p className="text-white/60 text-sm">A simple coverage estimate, not a guarantee of financial safety.</p>
         {/* Main Score Circular Element */}
-        <KineticScale delay={0.2} className="relative w-80 h-80 flex items-center justify-center p-2 rounded-full border border-purple-500/20 bg-[#1A1625]/60 backdrop-blur-xl shadow-[0_0_60px_rgba(167,139,250,0.15)] hover:shadow-[0_0_80px_rgba(167,139,250,0.3)] transition-all duration-500 group">
-          <div className="absolute inset-x-0 inset-y-0 rounded-full border-4 border-[#A78BFA]/30 group-hover:border-[#A78BFA]/50 group-hover:rotate-180 transition-all duration-1000 ease-in-out border-dashed opacity-50" />
+        <KineticScale delay={0.2} className="relative w-80 h-80 flex items-center justify-center p-2 rounded-full border border-purple-500/20 bg-[#25332c]/60 backdrop-blur-xl shadow-[0_0_60px_rgba(167,139,250,0.15)] hover:shadow-[0_0_80px_rgba(167,139,250,0.3)] transition-all duration-500 group">
+          <div className="absolute inset-x-0 inset-y-0 rounded-full border-4 border-[#8fb697]/30 group-hover:border-[#8fb697]/50 group-hover:rotate-180 transition-all duration-1000 ease-in-out border-dashed opacity-50" />
           
           <div className="flex flex-col items-center justify-center relative z-10 w-full h-full bg-black/40 rounded-full border border-white/5">
              <span className="text-[7rem] font-black display-font leading-none tracking-tighter text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-2">
@@ -127,13 +127,13 @@ const HealthScore = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
           
           {/* Card 1: Stability */}
-          <FadeIn delay={0.4} className={`${glassCardBase} hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(167,139,250,0.2)] hover:border-[#A78BFA]/40`}>
+          <FadeIn delay={0.4} className={`${glassCardBase} hover:-translate-y-1.5 hover:shadow-[0_15px_40px_rgba(167,139,250,0.2)] hover:border-[#8fb697]/40`}>
             <div>
               <div className="flex justify-between items-start mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-[#A78BFA]/10 border border-[#A78BFA]/20 flex items-center justify-center text-[#A78BFA]">
+                <div className="w-14 h-14 rounded-2xl bg-[#8fb697]/10 border border-[#8fb697]/20 flex items-center justify-center text-[#8fb697]">
                   <ShieldCheck size={28} />
                 </div>
-                <span className="text-4xl font-black text-white">{stabilityScore}<span className="text-[#A78BFA] text-2xl font-bold ml-1">%</span></span>
+                <span className="text-4xl font-black text-white">{stabilityScore}<span className="text-[#8fb697] text-2xl font-bold ml-1">%</span></span>
               </div>
               <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-3">Stability</h3>
               <p className="text-xs text-white/50 leading-relaxed font-medium mb-10">Calculated based on a 3-9 month expense coverage buffer.</p>
@@ -143,7 +143,7 @@ const HealthScore = () => {
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: `${stabilityScore}%` }}
-                className="h-full bg-gradient-to-r from-purple-600 to-[#A78BFA] rounded-full shadow-[0_0_15px_rgba(167,139,250,0.5)]" 
+                className="h-full bg-gradient-to-r from-purple-600 to-[#8fb697] rounded-full shadow-[0_0_15px_rgba(167,139,250,0.5)]" 
               />
             </div>
           </FadeIn>
@@ -196,7 +196,7 @@ const HealthScore = () => {
 
         {/* Info Banner */}
         <FadeIn delay={0.8} className="w-full max-w-5xl">
-          <div className="p-8 bg-[#1A1625]/40 backdrop-blur-md border border-white/5 rounded-[32px] flex items-center gap-6 text-left shadow-lg hover:border-white/10 transition-all">
+          <div className="p-8 bg-[#25332c]/40 backdrop-blur-md border border-white/5 rounded-[32px] flex items-center gap-6 text-left shadow-lg hover:border-white/10 transition-all">
              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                <Info className="text-white/40" size={24} />
              </div>

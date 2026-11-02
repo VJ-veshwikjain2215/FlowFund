@@ -78,7 +78,7 @@ const ProfileDropdown = () => {
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute right-0 mt-4 w-72 bg-[#1A1625]/95 backdrop-blur-2xl border border-white/10 rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-[60]"
+            className="absolute right-0 mt-4 w-72 bg-[#25332c]/95 backdrop-blur-2xl border border-white/10 rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden z-[60]"
           >
             {/* Header Info */}
             <div className="p-6 bg-white/5 border-b border-white/5 mb-2">

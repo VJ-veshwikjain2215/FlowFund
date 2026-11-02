@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
+import { apiBaseUrl } from '../config';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Lock, Mail, User, Loader2, Globe, Cpu, ShieldCheck } from 'lucide-react';
 
@@ -70,7 +71,7 @@ const Auth = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${(import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api').replace(/\/api\/?$/, '')}/oauth2/authorization/google`;
+    window.location.href = `${apiBaseUrl.replace(/\/api\/?$/, '')}/oauth2/authorization/google`;
   };
 
   return (

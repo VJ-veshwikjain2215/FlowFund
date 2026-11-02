@@ -54,6 +54,10 @@ def main():
     with tarfile.open(OUTPUT / "backend.tar.gz", "w:gz") as archive:
         add_bytes(archive, "pom.xml", (ROOT / "backend" / "pom.xml").read_bytes())
         add_tree(archive, ROOT / "backend" / "src" / "main", "src/main")
+        # Embarko's dashboard upload detector requires a recognized manifest;
+        # Railpack's provider below still selects the Maven/Java build.
+        manifest = {"name": "flowfund-backend", "private": True, "description": "Java backend; railpack.json selects Maven"}
+        add_bytes(archive, "package.json", json.dumps(manifest, indent=2).encode())
         railpack = {"provider": "java", "deploy": {"startCommand": "java -Xmx128m -Xss512k -XX:+UseSerialGC -XX:MaxMetaspaceSize=96m -XX:ReservedCodeCacheSize=24m -XX:MaxDirectMemorySize=16m -jar target/flowfund-engine-0.0.1-SNAPSHOT.jar"}}
         add_bytes(archive, "railpack.json", json.dumps(railpack, indent=2).encode())
 
@@ -65,3 +69,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -1,8 +1,29 @@
 # FlowFund | The Financial Operating System 🌊
 
-> **Deployment status:** Not production-ready until the security and end-to-end checks in [DEPLOYMENT_READINESS.md](DEPLOYMENT_READINESS.md) pass. The current CSV dashboard provides rule-based estimates; it does not move money or provide ARIMA forecasts. Claims below describing those capabilities are aspirational.
+> **Deployment status:** Not production-ready until the security and end-to-end checks in [deployment readiness notes](documents/DEPLOYMENT_READINESS.md) pass. The current CSV dashboard provides rule-based estimates; it does not move money or provide ARIMA forecasts. Claims below describing those capabilities are aspirational.
 
 FlowFund is a production-grade Financial Operating System (OS) designed for the modern freelance economy. It provides automated income stabilization, predictive financial forecasting, and risk-aware buffer management.
+
+## Repository structure
+
+```text
+FlowFund/
+|-- code/                       Application, configuration, and developer tools
+|   |-- frontend/               React / Vite interface
+|   |-- backend/                Spring Boot API and migrations
+|   |-- ai-service/             FastAPI analysis service
+|   |-- supabase/               Database schema reference
+|   |-- tests/legacy/           Original manual integration scripts
+|   |-- docker-compose.yml      Local multi-service setup
+|   `-- render.yaml             Render Blueprint
+|-- documents/                  Project documentation
+|   |-- project-plan/           Historical planning notes
+|   `-- DEPLOYMENT_READINESS.md  Configuration and release checks
+|-- .github/                    GitHub Actions and repository assets
+`-- README.md                   Project overview
+```
+
+See [code setup](code/README.md), the [documentation index](documents/README.md), and [structure and path changes](documents/repository-structure.md). Run service commands from the repository root unless a working directory is shown. Existing deployment settings that refer to the old directories need the paths in the structure guide.
 
 ---
 
@@ -44,19 +65,19 @@ To run the full FlowFund ecosystem, all three specialized engines must be active
 ### Stage 1: The AI Engine (Python FastAPI)
 Power the predictive modeling backbone.
 ```bash
-cd ai-service && python main.py
+cd code/ai-service && python main.py
 ```
 
 ### Stage 2: The Orchestrator (Java Spring Boot)
 Provide the secure API gateway and data management layer.
 ```bash
-cd backend && mvn spring-boot:run
+cd code/backend && mvn spring-boot:run
 ```
 
 ### Stage 3: The Dashboard (React Vite)
 Launch the premium visual interface.
 ```bash
-cd frontend && npm run dev
+cd code/frontend && npm run dev
 ```
 
 ---

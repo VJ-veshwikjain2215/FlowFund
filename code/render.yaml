@@ -3,8 +3,8 @@ services:
   - type: web
     name: flowfund-ai-service
     runtime: docker
-    dockerContext: ./ai-service
-    dockerfilePath: ./ai-service/Dockerfile
+    dockerContext: ./code/ai-service
+    dockerfilePath: ./code/ai-service/Dockerfile
     plan: free
     region: singapore
     envVars:
@@ -17,8 +17,8 @@ services:
   - type: web
     name: flowfund-backend
     runtime: docker
-    dockerContext: ./backend
-    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./code/backend
+    dockerfilePath: ./code/backend/Dockerfile
     plan: free
     region: singapore
     envVars:

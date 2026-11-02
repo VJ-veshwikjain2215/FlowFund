@@ -25,14 +25,14 @@ desktop.ini
 # =========================
 # FRONTEND (React / Node / Vite)
 # =========================
-frontend/node_modules/
+code/frontend/node_modules/
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-frontend/dist/
-frontend/build/
+code/frontend/dist/
+code/frontend/build/
 .env
 .env.local
 .env.development.local
@@ -42,7 +42,7 @@ frontend/build/
 # =========================
 # BACKEND (Spring Boot / Maven)
 # =========================
-backend/target/
+code/backend/target/
 *.class
 *.jar
 *.war
@@ -52,12 +52,12 @@ backend/target/
 !/.mvn/wrapper/maven-wrapper.jar
 mvnw
 mvnw.cmd
-backend/logs/
+code/backend/logs/
 
 # =========================
 # AI-SERVICE (Python / FastAPI)
 # =========================
-ai-service/__pycache__/
+code/ai-service/__pycache__/
 __pycache__/
 *.py[cod]
 *$py.class
@@ -99,3 +99,11 @@ venv.bak/
 test_income.csv
 .env
 application.properties
+# Local credentials and generated diagnostics at any project depth
+.env.*
+!**/.env.example
+code/logs/
+*.log
+
+# The committed Spring template uses environment placeholders
+!code/backend/src/main/resources/application.properties
